@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>moc;h;cpp</Extensions>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
+    <Filter Include="Header Files\Event">
+      <UniqueIdentifier>{a41c5138-0dfd-4667-94b5-dc12be0aa32b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Event">
+      <UniqueIdentifier>{d3ed30bb-7f8a-4747-9feb-9b51b1401e48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Logger">
+      <UniqueIdentifier>{e725b90a-2321-4495-b6c2-1abdc63be330}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Logger">
+      <UniqueIdentifier>{7ee301b5-399f-415b-b34a-aedf3dae7a48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Output">
+      <UniqueIdentifier>{8870c9cb-2d15-46c3-9739-adbbc16d05c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Output">
+      <UniqueIdentifier>{98ef479b-ecd0-430c-8e92-4e414b68f862}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Property">
+      <UniqueIdentifier>{a671c025-23eb-4bf5-8e35-58c7b729b28f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Property">
+      <UniqueIdentifier>{63c795f2-9e9f-4cd2-a37a-12e5dec06d4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Repository">
+      <UniqueIdentifier>{f596df7e-dc6f-41d2-81d0-bfff813b0b44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Repository">
+      <UniqueIdentifier>{17e2eb69-1322-45fc-9fd7-9335a61260f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Logger\impl">
+      <UniqueIdentifier>{8de2b52a-1a54-4ddd-bd56-2582c1198cd6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Output\impl">
+      <UniqueIdentifier>{ec871556-9b35-48da-b712-cf72a34f1cca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Repository\impl">
+      <UniqueIdentifier>{b6554eb0-bb11-4609-8b6e-7ed2dff62cc3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="McGlobal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="McLoggingEvent.h">
+      <Filter>Header Files\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="IMcLogger.h">
+      <Filter>Header Files\Logger</Filter>
+    </ClInclude>
+    <ClInclude Include="IMcOutput.h">
+      <Filter>Header Files\Output</Filter>
+    </ClInclude>
+    <ClInclude Include="McProperties.h">
+      <Filter>Header Files\Property</Filter>
+    </ClInclude>
+    <ClInclude Include="IMcLoggerRepository.h">
+      <Filter>Header Files\Repository</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="mclogqt_global.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="McLoggingEvent.cpp">
+      <Filter>Source Files\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="McLogManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="McLogger.cpp">
+      <Filter>Source Files\Logger</Filter>
+    </ClCompile>
+    <ClCompile Include="McLoggerRepository.cpp">
+      <Filter>Source Files\Repository</Filter>
+    </ClCompile>
+    <ClCompile Include="McOutput.cpp">
+      <Filter>Source Files\Output</Filter>
+    </ClCompile>
+    <ClCompile Include="McPropertyConfigurator.cpp">
+      <Filter>Source Files\Property</Filter>
+    </ClCompile>
+    <ClCompile Include="McProperties.cpp">
+      <Filter>Source Files\Property</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="McLogManager.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="McLogger.h">
+      <Filter>Header Files\Logger\impl</Filter>
+    </QtMoc>
+    <QtMoc Include="McOutput.h">
+      <Filter>Header Files\Output\impl</Filter>
+    </QtMoc>
+    <QtMoc Include="McPropertyConfigurator.h">
+      <Filter>Header Files\Property</Filter>
+    </QtMoc>
+    <QtMoc Include="McLoggerRepository.h">
+      <Filter>Header Files\Repository\impl</Filter>
+    </QtMoc>
+  </ItemGroup>
+</Project>
