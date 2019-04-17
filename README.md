@@ -1,6 +1,5 @@
 # McLogQt
-基于QT的日志记录库<br/>
-如果没有指定任何配置，则会采用默认配置：debug模式下会捕获debug以上所有消息，并输出到控制台，不输出到文件；release模式下捕获warn以上所有消息，不输出到控制台，输出到当前文件夹下的log.log文件里(若此文件存在，则会输出到log1.log，以此类推)
+基于QT的日志记录库
 
 # logger
 通过指定logger来指定具体需要捕获哪些等级的消息(debug模式下默认为debug以上，release模式下默认为warn以上，且只能指定该等级以上)，debug<warn<critical<fatal<info。
