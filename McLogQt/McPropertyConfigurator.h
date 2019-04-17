@@ -17,6 +17,7 @@ public:
 	McPropertyConfigurator(QObject *parent = 0);
 	~McPropertyConfigurator();
 
+	static void defaultConfigure() noexcept;
 	static void configure(const QString &configFilename) noexcept;
 	static void configure(QSettings &settings) noexcept;
 

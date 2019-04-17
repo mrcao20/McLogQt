@@ -25,6 +25,11 @@ void McLogger::setProperties(const McProperties &properties) noexcept {
 
 void McLogger::customEvent(QEvent *event) {
 	if (event->type() == McLog::CustomEventType::LoggingEvent) {
+		if (d->properties.isEmpty()) {
+			fprintf_s(stderr, "No configuration found, Maybe you can call "
+				"'McPropertyConfigurator::defaultConfigure' do default configuration!!\n");
+			return;
+		}
 		McLoggingEvent *loggingEvent = static_cast<McLoggingEvent *>(event);
 		if (!d->properties.contains(loggingEvent->m_msgType))
 			return;

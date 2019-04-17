@@ -16,6 +16,12 @@ McPropertyConfigurator::McPropertyConfigurator(QObject *parent)
 McPropertyConfigurator::~McPropertyConfigurator(){
 }
 
+void McPropertyConfigurator::defaultConfigure() noexcept {
+	fprintf_s(stderr, "Note: in debug, just output to console; "
+		"in release, not output!!\n");
+	configure("");
+}
+
 void McPropertyConfigurator::configure(const QString &configFilename) noexcept {
 	QSettings settings(configFilename, QSettings::IniFormat);
 	configure(settings);

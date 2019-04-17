@@ -8,8 +8,8 @@
 int main(int argc, char *argv[])
 {
 	QCoreApplication a(argc, argv);
-	McLog::McPropertyConfigurator::configure("./init.ini");
+	McLog::McPropertyConfigurator::defaultConfigure();
 	McLog::McLogManager::installQtMessageHandler();
-	qInfo() << "aaa";
+	qWarning() << "aaa";
 	return a.exec();
 }
