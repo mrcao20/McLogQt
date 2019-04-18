@@ -10,8 +10,17 @@ struct McLoggerRepositoryData {
 	IMcLogger *rootLogger{ Q_NULLPTR };
 	McProperties loggerProperties;
 
-	~McLoggerRepositoryData() {
+	void setProperties(const McProperties &properties) {
+		clearProperties();
+		loggerProperties = properties;
+	}
+
+	void clearProperties() {
 		qDeleteAll(loggerProperties);
+	}
+
+	~McLoggerRepositoryData() {
+		clearProperties();
 	}
 };
 
@@ -26,7 +35,7 @@ McLoggerRepository::~McLoggerRepository() {
 }
 
 void McLoggerRepository::configureLogger(const McProperties &properties) noexcept {
-	d->loggerProperties = properties;
+	d->setProperties(properties);
 	d->rootLogger->setProperties(d->loggerProperties);
 }
 
