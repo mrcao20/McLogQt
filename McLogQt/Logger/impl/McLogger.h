@@ -9,8 +9,8 @@ namespace McLog {
 struct McLoggerData;
 
 class McLogger : public QObject, public IMcLogger {
-	Q_OBJECT;
-	Q_DISABLE_COPY(McLogger);
+    Q_OBJECT
+    Q_DISABLE_COPY(McLogger)
 
 public:
 	explicit McLogger(QObject *parent = 0);

@@ -5,6 +5,8 @@
 
 #include "mclogqt_global.h"
 
+#define ROOT_LOGGER "root"
+
 namespace McLog {
 
 class IMcLoggerRepository;

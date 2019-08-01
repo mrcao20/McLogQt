@@ -18,18 +18,18 @@ public:
 	McProperties();
 	~McProperties();
 
-	void load(QSettings &settings) noexcept;
+    void load(const QString& loggerName, QSettings &settings) noexcept;
 
 private:
 	void getValue(QStringList &list, const QSettings &setting, 
-        const QString &key, const QString &defaultValue) noexcept;
+        const QString& loggerName, const QString &key, const QString &defaultValue) noexcept;
 	// 将传入的类型转换为对应的枚举，如果不存在，则返回-1
 	QtMsgType strToEnum(const QString &logger) noexcept;
 	void initLevel(QStringList &levels) noexcept;
 	void createOutput(const QStringList &loggers) noexcept;
 	void setOutputIsConsole(QStringList &consoles, const QStringList &loggers) noexcept;
-	void setOutputFile(const QSettings &setting, const QStringList &loggers) noexcept;
-	bool isFileAppend(const QSettings &setting, const QString &logger) noexcept;
+    void setOutputFile(const QSettings &setting, const QString& loggerName, const QStringList &loggers) noexcept;
+    bool isFileAppend(const QSettings &setting, const QString& loggerName, const QString &logger) noexcept;
 	bool checkFilePath(const QString &filePath) noexcept;
 	QFileDevice *createFileDevice(const QString &filePath, bool isAppend) noexcept;
 

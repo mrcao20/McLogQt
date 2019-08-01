@@ -15,8 +15,8 @@ public:
 	explicit McLoggerRepository(QObject *parent = 0);
 	virtual ~McLoggerRepository();
 
-	void configureLogger(const McProperties &properties) noexcept;
-	IMcLogger *getRootLogger() noexcept;
+    void addLogger(const QString& loggerName, IMcLogger* logger) noexcept;
+    IMcLogger* getLogger(const QString& loggerName) noexcept;
 
 private:
 	QScopedPointer<McLoggerRepositoryData> d;

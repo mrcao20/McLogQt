@@ -5,6 +5,7 @@
 #include "McLogManager.h"
 #include "McProperties.h"
 #include "../Repository/IMcLoggerRepository.h"
+#include "../Logger/impl/McLogger.h"
 
 namespace McLog {
 
@@ -17,7 +18,7 @@ McPropertyConfigurator::~McPropertyConfigurator(){
 }
 
 void McPropertyConfigurator::defaultConfigure() noexcept {
-	fprintf_s(stderr, "Note: in debug, just output to console; "
+    fprintf(stderr, "Note: in debug, just output to console; "
 		"in release, not output!!\n");
 	configure("");
 }
@@ -35,11 +36,36 @@ void McPropertyConfigurator::configure(QSettings &settings) noexcept {
 void McPropertyConfigurator::doConfigure(QSettings &settings, IMcLoggerRepository *loggerRepository) noexcept {
 	if (!loggerRepository)
 		loggerRepository = McLogManager::getInstance()->getLoggerRepository();
-	McProperties properties;
 
-	properties.load(settings);
+    QObject* loggerParent = dynamic_cast<QObject*>(loggerRepository);
+    if(!loggerParent){
+        fprintf(stderr, "logger repository must be inherit of QObject\n");
+        return;
+    }
 
-	loggerRepository->configureLogger(properties);
+#ifdef QT_DEBUG
+    QString section = "DEBUG";
+#else
+    QString section = "RELEASE";
+#endif // QT_DEBUG
+
+    settings.beginGroup(section);
+
+    QStringList loggerNames = settings.value("logger").toStringList();
+    if(!loggerNames.contains(ROOT_LOGGER))
+        loggerNames.prepend(ROOT_LOGGER);
+
+    for(auto& loggerName : loggerNames){
+        McProperties properties;
+
+        properties.load(loggerName, settings);
+
+        IMcLogger *logger = new McLogger(loggerParent);
+        logger->setProperties(properties);
+        loggerRepository->addLogger(loggerName, logger);
+    }
+
+    settings.endGroup();
 }
 
 }

@@ -13,8 +13,8 @@ namespace McLog {
 struct McOutputData;
 
 class McOutput : public QObject, public IMcOutput {
-	Q_OBJECT;
-	Q_DISABLE_COPY(McOutput);
+    Q_OBJECT
+    Q_DISABLE_COPY(McOutput)
 
 public:
 	explicit McOutput(const QString &level, QObject *parent = 0);

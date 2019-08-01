@@ -12,8 +12,8 @@ class IMcLoggerRepository {
 public:
 	virtual ~IMcLoggerRepository() = default;
 
-	virtual void configureLogger(const McProperties &properties) noexcept = 0;
-	virtual IMcLogger *getRootLogger() noexcept = 0;
+    virtual void addLogger(const QString& loggerName, IMcLogger* logger) noexcept = 0;
+    virtual IMcLogger* getLogger(const QString& loggerName) noexcept = 0;
 };
 
 }

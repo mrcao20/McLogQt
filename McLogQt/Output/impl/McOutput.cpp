@@ -45,7 +45,7 @@ void McOutput::output(const QMessageLogContext &msgLogCtx, const QString &msg) n
 	if (msgLogCtx.file == Q_NULLPTR
 		&& msgLogCtx.line == 0
 		&& msgLogCtx.function == Q_NULLPTR) {
-		fprintf_s(stderr, "in release, need to manual define QT_MESSAGELOGCONTEXT\n");
+        fprintf(stderr, "in release, need to manual define QT_MESSAGELOGCONTEXT\n");
 	}
 	QString str = d->format.arg(msg, msgLogCtx.file,
 		QString::number(msgLogCtx.line),

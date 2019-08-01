@@ -22,8 +22,9 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../build/build-McLogQt-Desktop_Qt_5_12_3_MinGW_64_bit-Debug/McLogQt/release/ -lMcLogQt
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../build/build-McLogQt-Desktop_Qt_5_12_3_MinGW_64_bit-Debug/McLogQt/debug/ -lMcLogQt
+unix:!macx: LIBS += -L$$PWD/../build/build-McLogQt-Qt5_8_0_static-Debug/McLogQt/ -lMcLogQt
 
 INCLUDEPATH += $$PWD/../McLogQt
 DEPENDPATH += $$PWD/../McLogQt
+
+unix:!macx: PRE_TARGETDEPS += $$PWD/../build/build-McLogQt-Qt5_8_0_static-Debug/McLogQt/libMcLogQt.a

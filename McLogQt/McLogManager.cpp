@@ -45,12 +45,28 @@ IMcLoggerRepository *McLogManager::getLoggerRepository() noexcept {
 }
 
 void McLogManager::customMessageHandler(QtMsgType msgType, const QMessageLogContext &msgLogCtx, const QString &msg) noexcept {
-	QObject *obj = dynamic_cast<QObject *>(getInstance()->m_loggerRepository->getRootLogger());
+    QString log;
+    QString loggerName;
+    if(!msg.startsWith(':')){
+        loggerName = ROOT_LOGGER;
+        log = msg;
+    }
+    else {
+        log = msg.right(msg.size() - 1 - msg.indexOf(' '));
+        loggerName = msg.mid(1, msg.indexOf(' ') - 1);
+    }
+
+    IMcLogger *logger = getInstance()->m_loggerRepository->getLogger(loggerName);
+    if(!logger){
+        logger = getInstance()->m_loggerRepository->getLogger(ROOT_LOGGER);
+        log = msg;
+    }
+    QObject *obj = dynamic_cast<QObject *>(logger);
 	if (!obj) {
-		fprintf_s(stderr, "logger must be inherit from QObject\n");
+        fprintf(stderr, "logger must be inherit from QObject\n");
 		return;
 	}
-	QEvent *event = new McLoggingEvent(msgType, msgLogCtx, msg);
+    QEvent *event = new McLoggingEvent(msgType, msgLogCtx, log);
 	qApp->postEvent(obj, event);
 }
 

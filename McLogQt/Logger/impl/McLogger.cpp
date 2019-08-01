@@ -8,6 +8,19 @@ namespace McLog {
 
 struct McLoggerData {
 	McProperties properties;
+
+    void setProperties(const McProperties &properties) {
+        clearProperties();
+        this->properties = properties;
+    }
+
+    void clearProperties() {
+        qDeleteAll(properties);
+    }
+
+    ~McLoggerData() {
+        clearProperties();
+    }
 };
 
 McLogger::McLogger(QObject *parent)
@@ -20,13 +33,13 @@ McLogger::~McLogger() {
 }
 
 void McLogger::setProperties(const McProperties &properties) noexcept {
-	d->properties = properties;
+    d->setProperties(properties);
 }
 
 void McLogger::customEvent(QEvent *event) {
 	if (event->type() == McLog::CustomEventType::LoggingEvent) {
 		if (d->properties.isEmpty()) {
-			fprintf_s(stderr, "No configuration found, Maybe you can call "
+            fprintf(stderr, "No configuration found, Maybe you can call "
 				"'McPropertyConfigurator::defaultConfigure' do default configuration!!\n");
 			return;
 		}

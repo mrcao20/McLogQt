@@ -1,46 +1,37 @@
 #include "McLoggerRepository.h"
 
-#include "../../Logger/impl/McLogger.h"
+#include <QHash>
+
 #include "../../Property/McProperties.h"
 #include "../../Output/IMcOutput.h"
 
 namespace McLog {
 
 struct McLoggerRepositoryData {
-	IMcLogger *rootLogger{ Q_NULLPTR };
-	McProperties loggerProperties;
+    QHash<QString, IMcLogger *> loggers;
 
-	void setProperties(const McProperties &properties) {
-		clearProperties();
-		loggerProperties = properties;
-	}
-
-	void clearProperties() {
-		qDeleteAll(loggerProperties);
-	}
-
-	~McLoggerRepositoryData() {
-		clearProperties();
-	}
+    ~McLoggerRepositoryData(){
+        qDeleteAll(loggers);
+    }
 };
 
 McLoggerRepository::McLoggerRepository(QObject *parent)
 	: QObject(parent)
 	, d(new McLoggerRepositoryData())
 {
-	d->rootLogger = new McLogger(this);
 }
 
 McLoggerRepository::~McLoggerRepository() {
 }
 
-void McLoggerRepository::configureLogger(const McProperties &properties) noexcept {
-	d->setProperties(properties);
-	d->rootLogger->setProperties(d->loggerProperties);
+void McLoggerRepository::addLogger(const QString& loggerName, IMcLogger* logger) noexcept{
+    d->loggers.insert(loggerName, logger);
 }
 
-IMcLogger *McLoggerRepository::getRootLogger() noexcept {
-	return d->rootLogger;
+IMcLogger* McLoggerRepository::getLogger(const QString& loggerName) noexcept{
+    if(!d->loggers.contains(loggerName))
+        return nullptr;
+    return d->loggers.value(loggerName);
 }
 
 }
