@@ -4,6 +4,7 @@
 
 #include "../../Property/McProperties.h"
 #include "../../Output/IMcOutput.h"
+#include "../../Logger/IMcLogger.h"
 
 namespace McLog {
 

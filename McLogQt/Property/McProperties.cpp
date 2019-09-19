@@ -131,7 +131,7 @@ void McProperties::setOutputIsConsole(QStringList &consoles, const QStringList &
 }
 
 void McProperties::setOutputFile(const QSettings &setting, const QString& loggerName, const QStringList &levels) noexcept {
-    QHash<QString, QFileDevice *> existsDevice;		// ????????????
+    QHash<QString, std::tuple<QString, bool, qint64>> existsFileInfo;
     QString commonPath = setting.value("file", "").toString();
     for (const QString &level: levels) {
         QString key = loggerName + "/" + level + "/file";
@@ -145,18 +145,17 @@ void McProperties::setOutputFile(const QSettings &setting, const QString& logger
             continue;
         if (!checkFilePath(logPath))
             continue;
-        QFileDevice *fileDevice = nullptr;
-        if (existsDevice.contains(logPath))
-            fileDevice = existsDevice[logPath];
+        std::tuple<QString, bool, qint64> fileInfo;
+        if (existsFileInfo.contains(logPath))
+            fileInfo = existsFileInfo[logPath];
         else {
             bool isAppend = isFileAppend(setting, loggerName, level);
-            fileDevice = createFileDevice(logPath, isAppend);
-            if (!fileDevice)
-                continue;
-            existsDevice.insert(logPath, fileDevice);
+            // TODO: 这里的文件最大长度暂时固定为10MB，后续调整为配置文件设置
+            fileInfo = std::tuple<QString, bool, qint64>(logPath, isAppend, 10240);
+            existsFileInfo.insert(logPath, fileInfo);
         }
         IMcOutput *output = value(type);
-        output->addFileDevice(fileDevice);
+        output->addFileDevice(std::get<0>(fileInfo), std::get<1>(fileInfo), std::get<2>(fileInfo));
     }
 }
 
@@ -185,18 +184,6 @@ bool McProperties::checkFilePath(const QString &filePath) noexcept {
         return true;
     fprintf(stderr, "failed to create path named '%s'\n", dir.absolutePath().toLocal8Bit().data());
     return false;
-}
-
-QFileDevice *McProperties::createFileDevice(const QString &filePath, bool isAppend) noexcept {
-    QFile *file = new QFile(filePath);
-    QIODevice::OpenMode mode = QIODevice::WriteOnly;
-    if (isAppend)
-        mode |= QIODevice::Append;
-    if (!file->open(mode)) {
-        fprintf(stderr, "failed to open file named '%s'\n", filePath.toLocal8Bit().data());
-        return nullptr;
-    }
-    return file;
 }
 
 }

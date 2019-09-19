@@ -8,6 +8,8 @@
 #include <QObject>
 #include "../IMcOutput.h"
 
+#include <QIODevice>
+
 namespace McLog {
 
 struct McOutputData;
@@ -21,10 +23,16 @@ public:
 	virtual ~McOutput();
 
 	// 添加需要输出到的文件设备，会通过setParent将所有权转移到本对象
-	void addFileDevice(QFileDevice *file) noexcept;
+    void addFileDevice(QFile *file, qint64 maxLen = 0) noexcept override;
+    void addFileDevice(const QString &filePath, bool isAppend, qint64 maxLen) noexcept override;
 
 	// 输出
 	void output(const QMessageLogContext &msgLogCtx, const QString &msg) noexcept override;
+
+private:
+    QString getNewFilePath(const QString& filePath);
+    // 单位byte
+    bool createNewFile(QFile *file, const QString& filePath, QIODevice::OpenMode mode, qint64 maxLen) noexcept;
 
 private:
 	QScopedPointer<McOutputData> d;

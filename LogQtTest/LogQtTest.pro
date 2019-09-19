@@ -1,13 +1,13 @@
-QT -= gui
+QT += widgets
 
-CONFIG += c++11 console
+CONFIG += c++11
 CONFIG -= app_bundle
 
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
 # deprecated API in order to know how to port your code away from it.
-DEFINES += QT_DEPRECATED_WARNINGS
+DEFINES += QT_DEPRECATED_WARNINGS QT_MESSAGELOGCONTEXT
 
 # You can also make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -22,9 +22,9 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-unix:!macx: LIBS += -L$$PWD/../build/build-McLogQt-Qt5_8_0_static-Debug/McLogQt/ -lMcLogQt
+unix:!macx: LIBS += -L$$PWD/../build/build-McLogQt-Qt5_8_0_static-Release/McLogQt/ -lMcLogQt
 
 INCLUDEPATH += $$PWD/../McLogQt
 DEPENDPATH += $$PWD/../McLogQt
 
-unix:!macx: PRE_TARGETDEPS += $$PWD/../build/build-McLogQt-Qt5_8_0_static-Debug/McLogQt/libMcLogQt.a
+unix:!macx: PRE_TARGETDEPS += $$PWD/../build/build-McLogQt-Qt5_8_0_static-Release/McLogQt/libMcLogQt.a

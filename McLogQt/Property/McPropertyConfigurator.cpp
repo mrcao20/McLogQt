@@ -1,5 +1,6 @@
 #include "McPropertyConfigurator.h"
 
+#include <qglobal.h>
 #include <qdebug.h>
 
 #include "McLogManager.h"
@@ -37,12 +38,6 @@ void McPropertyConfigurator::doConfigure(QSettings &settings, IMcLoggerRepositor
 	if (!loggerRepository)
 		loggerRepository = McLogManager::getInstance()->getLoggerRepository();
 
-    QObject* loggerParent = dynamic_cast<QObject*>(loggerRepository);
-    if(!loggerParent){
-        fprintf(stderr, "logger repository must be inherit of QObject\n");
-        return;
-    }
-
 #ifdef QT_DEBUG
     QString section = "DEBUG";
 #else
@@ -60,7 +55,7 @@ void McPropertyConfigurator::doConfigure(QSettings &settings, IMcLoggerRepositor
 
         properties.load(loggerName, settings);
 
-        IMcLogger *logger = new McLogger(loggerParent);
+        IMcLogger *logger = new McLogger();
         logger->setProperties(properties);
         loggerRepository->addLogger(loggerName, logger);
     }

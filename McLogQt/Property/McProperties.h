@@ -31,7 +31,6 @@ private:
     void setOutputFile(const QSettings &setting, const QString& loggerName, const QStringList &loggers) noexcept;
     bool isFileAppend(const QSettings &setting, const QString& loggerName, const QString &logger) noexcept;
 	bool checkFilePath(const QString &filePath) noexcept;
-	QFileDevice *createFileDevice(const QString &filePath, bool isAppend) noexcept;
 
 };
 
