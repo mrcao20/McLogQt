@@ -4,8 +4,9 @@
 #include <QFileInfo>
 #include <QDir>
 #include <qdatetime.h>
+#include <QTextStream>
 
-#define __DATE_TIME__ QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss")
+#define __DATE_TIME__ QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss,zzz")
 
 namespace McLog {
 
@@ -22,13 +23,19 @@ struct McOutputData {
     }
 };
 
-McOutput::McOutput(const QString &level, QObject *parent)
+McOutput::McOutput(const QString& loggerName, const QString &level, QObject *parent)
     : QObject(parent)
     , d(new McOutputData())
 {
     d->level = level.toUpper();
-    d->format = "[" + d->level + "]:  "
-        + "Message:\"%1\"  File:%2  Line:%3  Function:%4  DateTime:%5\n";
+//    d->format = "[" + d->level + "]:  "
+//        + "Message:\"%1\"  File:%2  Line:%3  Function:%4  DateTime:%5\n";
+    QTextStream textStream(&d->format);
+    textStream << left
+               << qSetFieldWidth(0) << "[%1]"
+               << qSetFieldWidth(0) << QString("[%1]").arg(loggerName)
+               << qSetFieldWidth(12) << QString("[%1]: ").arg(d->level)
+               << qSetFieldWidth(0) << "%2  [File:%3] [Line:%4] [Function:%5]\n";
 }
 
 McOutput::~McOutput(){
@@ -61,9 +68,10 @@ void McOutput::output(const QMessageLogContext &msgLogCtx, const QString &msg) n
         && msgLogCtx.function == Q_NULLPTR) {
         fprintf(stderr, "in release, need to manual define QT_MESSAGELOGCONTEXT\n");
     }
-    QString str = d->format.arg(msg, msgLogCtx.file,
-        QString::number(msgLogCtx.line),
-        msgLogCtx.function, __DATE_TIME__);
+    QString str = d->format.arg(__DATE_TIME__, msg
+        , msgLogCtx.file
+        , QString::number(msgLogCtx.line)
+        , msgLogCtx.function);
     for (auto file : d->fileDevices.keys()) {
         if(!file->isOpen())
             continue;

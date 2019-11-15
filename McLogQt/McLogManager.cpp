@@ -46,14 +46,17 @@ IMcLoggerRepository *McLogManager::getLoggerRepository() noexcept {
 
 void McLogManager::customMessageHandler(QtMsgType msgType, const QMessageLogContext &msgLogCtx, const QString &msg) noexcept {
     QString log;
-    QString loggerName;
-    if(!msg.startsWith(':')){
+    QStringList strList = msg.split(' ');
+    QString loggerName = strList.isEmpty() ? "" : strList.at(0);
+    if(loggerName.startsWith('"') && loggerName.endsWith('"'))
+        loggerName.remove(loggerName.size() - 1, 1).remove(0, 1);
+    if(loggerName.isEmpty() || !loggerName.startsWith(':')){
         loggerName = ROOT_LOGGER;
         log = msg;
     }
     else {
         log = msg.right(msg.size() - 1 - msg.indexOf(' '));
-        loggerName = msg.mid(1, msg.indexOf(' ') - 1);
+        loggerName.remove(0, 1);
     }
 
     IMcLogger *logger = getInstance()->m_loggerRepository->getLogger(loggerName);

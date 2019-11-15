@@ -19,7 +19,7 @@ class McOutput : public QObject, public IMcOutput {
     Q_DISABLE_COPY(McOutput)
 
 public:
-	explicit McOutput(const QString &level, QObject *parent = 0);
+    explicit McOutput(const QString& loggerName, const QString &level, QObject *parent = 0);
 	virtual ~McOutput();
 
 	// 添加需要输出到的文件设备，会通过setParent将所有权转移到本对象

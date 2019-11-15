@@ -40,7 +40,7 @@ void McProperties::load(const QString& loggerName, QSettings &settings) noexcept
             .toLatin1().data());
         return;
     }
-    createOutput(levels);
+    createOutput(loggerName, levels);
     QStringList consoles;
     getValue(consoles, settings, loggerName, "console", console);
     setOutputIsConsole(consoles, levels);
@@ -102,12 +102,12 @@ void McProperties::initLevel(QStringList &levels) noexcept {
     }
 }
 
-void McProperties::createOutput(const QStringList &levels) noexcept {
+void McProperties::createOutput(const QString& loggerName, const QStringList &levels) noexcept {
     for (const QString &level : levels) {
         QtMsgType type = strToEnum(level);
         if (type == -1)
             continue;
-        insert(type, new McOutput(level));
+        insert(type, new McOutput(loggerName, level));
     }
 }
 
@@ -135,8 +135,11 @@ void McProperties::setOutputFile(const QSettings &setting, const QString& logger
     QString commonPath = setting.value("file", "").toString();
     for (const QString &level: levels) {
         QString key = loggerName + "/" + level + "/file";
-        if(!setting.contains(key))
-            key = level + "/file";
+        if(!setting.contains(key)){
+            key = loggerName + "/file";
+            if(!setting.contains(key))
+                key = level + "/file";
+        }
         QString logPath = setting.value(key, "").toString();
         if (logPath.isEmpty() && (logPath = commonPath).isEmpty())
             continue;

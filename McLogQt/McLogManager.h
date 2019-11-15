@@ -12,8 +12,8 @@ namespace McLog {
 class IMcLoggerRepository;
 
 class MCLOGQT_EXPORT McLogManager : public QObject {
-	Q_OBJECT;
-	Q_DISABLE_COPY(McLogManager);
+    Q_OBJECT
+    Q_DISABLE_COPY(McLogManager)
 	McLogManager(QObject *parent = 0);
 
 public:
