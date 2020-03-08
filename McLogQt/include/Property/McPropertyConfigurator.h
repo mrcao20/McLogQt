@@ -1,10 +1,9 @@
-#ifndef _MC_PROPERTY_CONFIGURATOR_H_
-#define _MC_PROPERTY_CONFIGURATOR_H_
+#pragma once
 
 #include <QObject>
 #include <qsettings.h>
 
-#include "mclogqt_global.h"
+#include "..//McLogQt_Global.h"
 
 namespace McLog {
 
@@ -14,7 +13,7 @@ class MCLOGQT_EXPORT McPropertyConfigurator : public QObject {
 	Q_OBJECT
 
 public:
-	McPropertyConfigurator(QObject *parent = 0);
+	McPropertyConfigurator(QObject *parent = nullptr);
 	~McPropertyConfigurator();
 
 	static void defaultConfigure() noexcept;
@@ -25,5 +24,3 @@ public:
 };
 
 }
-
-#endif // !_MC_PROPERTY_CONFIGURATOR_H_

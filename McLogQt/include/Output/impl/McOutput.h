@@ -1,9 +1,8 @@
 /**
-	Ä¬ÈÏÇé¿öÏÂ¼È²»Êä³öµ½¿ØÖÆÌ¨£¬Ò²²»Êä³öµ½ÎÄ¼ş£¬ĞèÒªÊÖ¶¯ÉèÖÃ
+	é»˜è®¤æƒ…å†µä¸‹æ—¢ä¸è¾“å‡ºåˆ°æ§åˆ¶å°ï¼Œä¹Ÿä¸è¾“å‡ºåˆ°æ–‡ä»¶ï¼Œéœ€è¦æ‰‹åŠ¨è®¾ç½®
 */
 
-#ifndef _MC_OUTPUT_H_
-#define _MC_OUTPUT_H_
+#pragma once
 
 #include <QObject>
 #include "../IMcOutput.h"
@@ -19,25 +18,24 @@ class McOutput : public QObject, public IMcOutput {
     Q_DISABLE_COPY(McOutput)
 
 public:
-    explicit McOutput(const QString& loggerName, const QString &level, QObject *parent = 0);
-	virtual ~McOutput();
+    explicit McOutput(const QString& loggerName, const QString &level, QObject *parent = nullptr);
+	virtual ~McOutput() override;
 
-	// Ìí¼ÓĞèÒªÊä³öµ½µÄÎÄ¼şÉè±¸£¬»áÍ¨¹ısetParent½«ËùÓĞÈ¨×ªÒÆµ½±¾¶ÔÏó
+	// æ·»åŠ éœ€è¦è¾“å‡ºåˆ°çš„æ–‡ä»¶è®¾å¤‡ï¼Œä¼šé€šè¿‡setParentå°†æ‰€æœ‰æƒè½¬ç§»åˆ°æœ¬å¯¹è±¡
     void addFileDevice(QFile *file, qint64 maxLen = 0) noexcept override;
     void addFileDevice(const QString &filePath, bool isAppend, qint64 maxLen) noexcept override;
 
-	// Êä³ö
+	// è¾“å‡º
 	void output(const QMessageLogContext &msgLogCtx, const QString &msg) noexcept override;
 
 private:
-    QString getNewFilePath(const QString& filePath);
-    // µ¥Î»byte
-    bool createNewFile(QFile *file, const QString& filePath, QIODevice::OpenMode mode, qint64 maxLen) noexcept;
+    QString getNewFilePath();
+    // å•ä½byte
+    void createNewFile(QFile *file, QIODevice::OpenMode mode) noexcept;
+    void openFile(QFile *file, const QString &filePath, QIODevice::OpenMode mode);
 
 private:
 	QScopedPointer<McOutputData> d;
 };
 
 }
-
-#endif // !_MC_OUTPUT_H_

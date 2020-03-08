@@ -1,11 +1,10 @@
-#ifndef _MC_LOGGING_EVENT_H_
-#define _MC_LOGGING_EVENT_H_
+#pragma once
 
 #include <QEvent>
 
 #include <qstring.h>
 
-#include "McGlobal.h"
+#include "include/McGlobal.h"
 
 namespace McLog {
 
@@ -14,7 +13,7 @@ public:
 	static const QEvent::Type eventType;
 
 	inline McLoggingEvent(QtMsgType msgType, const QMessageLogContext &msgLogCtx, const QString &msg);
-	virtual ~McLoggingEvent() = default;
+	virtual ~McLoggingEvent() override;
 private:
 	QtMsgType m_msgType{ static_cast<QtMsgType>(-1) };
 	QMessageLogContext m_msgLogCtx;
@@ -32,6 +31,3 @@ inline McLoggingEvent::McLoggingEvent(QtMsgType msgType, const QMessageLogContex
 }
 
 }
-
-#endif // !_MC_LOGGING_EVENT_H_
-

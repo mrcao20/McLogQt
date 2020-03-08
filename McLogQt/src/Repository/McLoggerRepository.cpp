@@ -1,10 +1,10 @@
-#include "McLoggerRepository.h"
+#include "include/Repository/impl/McLoggerRepository.h"
 
 #include <QHash>
 
-#include "../../Property/McProperties.h"
-#include "../../Output/IMcOutput.h"
-#include "../../Logger/IMcLogger.h"
+#include "include/Property/McProperties.h"
+#include "include/Output/IMcOutput.h"
+#include "include/Logger/IMcLogger.h"
 
 namespace McLog {
 

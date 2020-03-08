@@ -1,10 +1,10 @@
-#include "McProperties.h"
+#include "include/Property/McProperties.h"
 
 #include <qsettings.h>
 #include <qfileinfo.h>
 #include <qdir.h>
 
-#include "../Output/impl/McOutput.h"
+#include "include/Output/impl/McOutput.h"
 
 #define LEVEL_DEBUG "debug"
 #define LEVEL_WARN "warn"
@@ -146,8 +146,9 @@ void McProperties::setOutputFile(const QSettings &setting, const QString& logger
         QtMsgType type = strToEnum(level);
         if (type == -1)
             continue;
-        if (!checkFilePath(logPath))
-            continue;
+        Q_ASSERT_X(checkFilePath(logPath)
+                   , "checkFilePath"
+                   , "cannot create log dir");
         std::tuple<QString, bool, qint64> fileInfo;
         if (existsFileInfo.contains(logPath))
             fileInfo = existsFileInfo[logPath];
@@ -176,11 +177,15 @@ bool McProperties::isFileAppend(const QSettings &setting, const QString& loggerN
     return isAppend;
 }
 
+// TODO()后续应该移动到Output中
 bool McProperties::checkFilePath(const QString &filePath) noexcept {
     QFileInfo fileInfo(filePath);
-    if (fileInfo.exists())
+    if (fileInfo.exists())  // 不管指定的是文件还是文件夹，如果存在，则直接返回
         return true;
-    QDir dir = fileInfo.absoluteDir();
+    QDir dir(filePath); // 假定为文件夹
+    if(!filePath.endsWith('/')) {
+        dir = fileInfo.absoluteDir();
+    }
     if (dir.exists())
         return true;
     if (dir.mkpath(dir.absolutePath()))
