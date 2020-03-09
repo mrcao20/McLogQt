@@ -143,9 +143,8 @@ void McOutput::createNewFile(QFile *file, QIODevice::OpenMode mode) noexcept {
 
 void McOutput::openFile(QFile *file, const QString &filePath, QIODevice::OpenMode mode) {
     file->setFileName(filePath);
-    if (!file->open(mode)) {
-        Q_ASSERT_X(false, "openFile", "open log file failure");
-    }
+    bool ret = file->open(mode);
+     Q_ASSERT_X(ret, "openFile", "open log file failure");
 }
 
 }

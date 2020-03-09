@@ -16,9 +16,10 @@ int main(int argc, char *argv[])
     McLog::McLogManager::installQtMessageHandler();
     QDir dir("./log");
     auto strs = dir.entryList(QDir::Files, QDir::Time);
-    qDebug() << strs;
+    qInfo() << strs;
     QFileInfo info("./log/.gat.gz");
-    qDebug() << info.baseName()
+    qCritical() << "aaaa";
+    qWarning() << info.baseName()
              << info.completeSuffix();
 //    for(int i = 0; i < 10000; ++i){
 //        QString a = ":Lidar[1]";

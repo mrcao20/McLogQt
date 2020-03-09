@@ -146,9 +146,8 @@ void McProperties::setOutputFile(const QSettings &setting, const QString& logger
         QtMsgType type = strToEnum(level);
         if (type == -1)
             continue;
-        Q_ASSERT_X(checkFilePath(logPath)
-                   , "checkFilePath"
-                   , "cannot create log dir");
+        bool ret = checkFilePath(logPath);
+        Q_ASSERT_X(ret, "checkFilePath", "cannot create log dir");
         std::tuple<QString, bool, qint64> fileInfo;
         if (existsFileInfo.contains(logPath))
             fileInfo = existsFileInfo[logPath];
