@@ -23,27 +23,29 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    Event/McLoggingEvent.cpp \
-    Logger/impl/McLogger.cpp \
-    McLogManager.cpp \
-    Output/impl/McOutput.cpp \
-    Property/McProperties.cpp \
-    Property/McPropertyConfigurator.cpp \
-    Repository/impl/McLoggerRepository.cpp
+    src/Event/McLoggingEvent.cpp \
+    src/Logger/McLogger.cpp \
+    src/McLogManager.cpp \
+    src/Output/McOutput.cpp \
+    src/Property/McProperties.cpp \
+    src/Property/McPropertyConfigurator.cpp \
+    src/Repository/McLoggerRepository.cpp
 
 HEADERS += \
-        Event/McLoggingEvent.h \
-        Logger/IMcLogger.h \
-        Logger/impl/McLogger.h \
-        McGlobal.h \
-        McLogManager.h \
-        Output/IMcOutput.h \
-        Output/impl/McOutput.h \
-        Property/McProperties.h \
-        Property/McPropertyConfigurator.h \
-        Repository/IMcLoggerRepository.h \
-        Repository/impl/McLoggerRepository.h \
-        mclogqt_global.h 
+    include/Event/McLoggingEvent.h \
+    include/Logger/IMcLogger.h \
+    include/Logger/impl/McLogger.h \
+    include/McGlobal.h \
+    include/McLogManager.h \
+    include/McLogQt_Global.h \
+    include/McLogVersion.h \
+    include/McMacroGlobal.h \
+    include/Output/IMcOutput.h \
+    include/Output/impl/McOutput.h \
+    include/Property/McProperties.h \
+    include/Property/McPropertyConfigurator.h \
+    include/Repository/IMcLoggerRepository.h \
+    include/Repository/impl/McLoggerRepository.h
 
 unix {
     target.path = /usr/lib

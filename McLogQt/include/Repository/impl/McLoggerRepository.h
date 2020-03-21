@@ -1,5 +1,4 @@
-#ifndef _MC_LOGGER_REPOSITORY_H_
-#define _MC_LOGGER_REPOSITORY_H_
+#pragma once
 
 #include <QObject>
 #include "../IMcLoggerRepository.h"
@@ -12,7 +11,7 @@ class McLoggerRepository : public QObject, public IMcLoggerRepository {
 	Q_OBJECT
 
 public:
-	explicit McLoggerRepository(QObject *parent = 0);
+	explicit McLoggerRepository(QObject *parent = nullptr);
 	virtual ~McLoggerRepository();
 
     void addLogger(const QString& loggerName, IMcLogger* logger) noexcept;
@@ -23,5 +22,3 @@ private:
 };
 
 }
-
-#endif // !_MC_LOGGER_REPOSITORY_H_

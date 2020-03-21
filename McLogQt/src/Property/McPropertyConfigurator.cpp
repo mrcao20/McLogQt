@@ -1,12 +1,12 @@
-#include "McPropertyConfigurator.h"
+#include "include/Property/McPropertyConfigurator.h"
 
 #include <qglobal.h>
 #include <qdebug.h>
 
-#include "McLogManager.h"
-#include "McProperties.h"
-#include "../Repository/IMcLoggerRepository.h"
-#include "../Logger/impl/McLogger.h"
+#include "include/McLogManager.h"
+#include "include/Property/McProperties.h"
+#include "include/Repository/IMcLoggerRepository.h"
+#include "include/Logger/impl/McLogger.h"
 
 namespace McLog {
 

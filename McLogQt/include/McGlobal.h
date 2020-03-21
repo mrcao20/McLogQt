@@ -1,5 +1,6 @@
-#ifndef _MC_GLOBAL_H_
-#define _MC_GLOBAL_H_
+#pragma once
+
+#include "McMacroGlobal.h"
 
 #define MC_SAFE_DELETE(p) (p) ? (delete p, p = Q_NULLPTR) : true
 
@@ -12,5 +13,3 @@ enum CustomEventType {
 };
 
 }
-
-#endif // !_MC_GLOBAL_H_

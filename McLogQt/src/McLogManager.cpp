@@ -1,12 +1,12 @@
-#include "McLogManager.h"
+#include "include/McLogManager.h"
 
 #include <qcoreapplication.h>
 #include <qmutex.h>
 
-#include "McGlobal.h"
-#include "Repository/impl/McLoggerRepository.h"
-#include "Logger/IMcLogger.h"
-#include "Event/McLoggingEvent.h"
+#include "include/McGlobal.h"
+#include "include/Repository/impl/McLoggerRepository.h"
+#include "include/Logger/IMcLogger.h"
+#include "include/Event/McLoggingEvent.h"
 
 namespace McLog {
 

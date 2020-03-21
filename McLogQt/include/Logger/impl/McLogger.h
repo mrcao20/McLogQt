@@ -1,5 +1,4 @@
-#ifndef _MC_LOGGER_H_
-#define _MC_LOGGER_H_
+#pragma once
 
 #include <QObject>
 #include "../IMcLogger.h"
@@ -13,8 +12,8 @@ class McLogger : public QObject, public IMcLogger {
     Q_DISABLE_COPY(McLogger)
 
 public:
-	explicit McLogger(QObject *parent = 0);
-	virtual ~McLogger();
+	explicit McLogger(QObject *parent = nullptr);
+	virtual ~McLogger() override;
 
 	void setProperties(const McProperties &properties) noexcept override;
 
@@ -26,5 +25,3 @@ private:
 };
 
 }
-
-#endif // !_MC_LOGGER_H_

@@ -1,5 +1,4 @@
-#ifndef _MC_PROPERTIES_H_
-#define _MC_PROPERTIES_H_
+#pragma once
 
 #include <qhash.h>
 
@@ -23,7 +22,7 @@ public:
 private:
 	void getValue(QStringList &list, const QSettings &setting, 
         const QString& loggerName, const QString &key, const QString &defaultValue) noexcept;
-	// 将传入的类型转换为对应的枚举，如果不存在，则返回-1
+	// 灏嗕紶鍏ョ殑绫诲瀷杞崲涓哄搴旂殑鏋氫妇锛屽鏋滀笉瀛樺湪锛屽垯杩斿洖-1
 	QtMsgType strToEnum(const QString &logger) noexcept;
 	void initLevel(QStringList &levels) noexcept;
     void createOutput(const QString& loggerName, const QStringList &loggers) noexcept;
@@ -35,5 +34,3 @@ private:
 };
 
 }
-
-#endif // !_MC_PROPERTIES_H_

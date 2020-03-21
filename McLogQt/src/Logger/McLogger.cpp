@@ -1,8 +1,8 @@
-#include "McLogger.h"
+#include "include/Logger/impl/McLogger.h"
 
-#include "../../Property/McProperties.h"
-#include "../../Output/IMcOutput.h"
-#include "../../Event/McLoggingEvent.h"
+#include "include/Property/McProperties.h"
+#include "include/Output/IMcOutput.h"
+#include "include/Event/McLoggingEvent.h"
 
 namespace McLog {
 

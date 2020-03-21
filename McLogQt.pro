@@ -1,5 +1,5 @@
 TEMPLATE = subdirs
 
 SUBDIRS += \
-    LogQtTest \
-    McLogQt
+    McLogQt \
+    LogQtTest

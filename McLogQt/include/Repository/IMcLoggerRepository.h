@@ -1,5 +1,4 @@
-#ifndef _I_MC_LOGGER_REPOSITORY_H_
-#define _I_MC_LOGGER_REPOSITORY_H_
+#pragma once
 
 #include <qglobal.h>
 
@@ -17,6 +16,3 @@ public:
 };
 
 }
-
-#endif // !_I_MC_LOGGER_REPOSITORY_H_
-

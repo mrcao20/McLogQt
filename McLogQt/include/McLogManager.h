@@ -1,11 +1,9 @@
-#ifndef _MC_LOG_MANAGER_H_
-#define _MC_LOG_MANAGER_H_
+#pragma once
 
 #include <QObject>
 
-#include "mclogqt_global.h"
-
-#define ROOT_LOGGER "root"
+#include "McLogQt_Global.h"
+#include "McGlobal.h"
 
 namespace McLog {
 
@@ -14,7 +12,7 @@ class IMcLoggerRepository;
 class MCLOGQT_EXPORT McLogManager : public QObject {
     Q_OBJECT
     Q_DISABLE_COPY(McLogManager)
-	McLogManager(QObject *parent = 0);
+	McLogManager(QObject *parent = nullptr);
 
 public:
 	~McLogManager();
@@ -35,5 +33,3 @@ private:
 };
 
 }
-
-#endif // !_MC_LOG_MANAGER_H_
