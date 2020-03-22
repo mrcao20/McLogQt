@@ -45,31 +45,21 @@ IMcLoggerRepository *McLogManager::getLoggerRepository() noexcept {
 }
 
 void McLogManager::customMessageHandler(QtMsgType msgType, const QMessageLogContext &msgLogCtx, const QString &msg) noexcept {
-    QString log;
-    QStringList strList = msg.split(' ');
-    QString loggerName = strList.isEmpty() ? "" : strList.at(0);
-    if(loggerName.startsWith('"') && loggerName.endsWith('"'))
-        loggerName.remove(loggerName.size() - 1, 1).remove(0, 1);
-    if(loggerName.isEmpty() || !loggerName.startsWith(':')){
-        loggerName = ROOT_LOGGER;
-        log = msg;
-    }
-    else {
-        log = msg.right(msg.size() - 1 - msg.indexOf(' '));
-        loggerName.remove(0, 1);
-    }
+    auto loggerName = msgLogCtx.category;
 
     IMcLogger *logger = getInstance()->m_loggerRepository->getLogger(loggerName);
     if(!logger){
-        logger = getInstance()->m_loggerRepository->getLogger(ROOT_LOGGER);
-        log = msg;
+        // 把这两行提取到一个宏中代替
+        fprintf(stderr, "not exists logger for named: %s\n", loggerName);
+        fflush(stderr);
+        return;
     }
     QObject *obj = dynamic_cast<QObject *>(logger);
 	if (!obj) {
         fprintf(stderr, "logger must be inherit from QObject\n");
 		return;
 	}
-    QEvent *event = new McLoggingEvent(msgType, msgLogCtx, log);
+    QEvent *event = new McLoggingEvent(msgType, msgLogCtx, msg);
 	qApp->postEvent(obj, event);
 }
 

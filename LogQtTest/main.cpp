@@ -7,6 +7,7 @@
 #include <McLogManager.h>
 #include <QFileInfo>
 #include <QDir>
+#include <QLoggingCategory>
 
 int main(int argc, char *argv[])
 {
@@ -16,7 +17,7 @@ int main(int argc, char *argv[])
     McLog::McLogManager::installQtMessageHandler();
     QDir dir("./log");
     auto strs = dir.entryList(QDir::Files, QDir::Time);
-    qInfo() << strs;
+    qInfo(MC_LOGGER("Lidar[1]")) << strs;
     QFileInfo info("./log/.gat.gz");
     qCritical() << "aaaa";
     qWarning() << info.baseName()

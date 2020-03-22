@@ -47,8 +47,8 @@ void McPropertyConfigurator::doConfigure(QSettings &settings, IMcLoggerRepositor
     settings.beginGroup(section);
 
     QStringList loggerNames = settings.value("logger").toStringList();
-    if(!loggerNames.contains(ROOT_LOGGER))
-        loggerNames.prepend(ROOT_LOGGER);
+    if(!loggerNames.contains(DEFAULT_LOGGER))
+        loggerNames.prepend(DEFAULT_LOGGER);
 
     for(auto& loggerName : loggerNames){
         McProperties properties;
