@@ -5,7 +5,7 @@
 需重构以整理配置文件
 
 # logger
-日志记录器，本库默认带有一个default的日志记录器，故新指定的logger无需指定default，当然指定了也没事。logger的作用是创建一个新的日志记录器，每一个logger都可以有独自的配置信息，也可以使用公有的配置。logger的使用方法为：当记录日志时，第一个输出字符串使用:[logger]的方式指定对应的logger。即，当我需要记录一个info类型的日志信息"hello world"，需要指定到自定义的一个logger "test"，所使用的格式为：qInfo() << ":test" << "hello world";":test"也可以不指定，当不指定时hello world将会输出到default的logger中。注意，:test中的test必须在配置文件中指定，即该logger必须创建，如果没有创建，那么:test将会作为一个字符串输出到default中。
+日志记录器，本库默认带有一个default的日志记录器，故新指定的logger无需指定default，当然指定了也没事。logger的作用是创建一个新的日志记录器，每一个logger都可以有独自的配置信息，也可以使用公有的配置。logger的使用方法为：使用qInfo等宏时，在后面接着的括号中构建一个QLoggingCategory，即: qInfo(QLoggingCategory("default")) << "text";当然的，QLoggingCategory("default")也可以使用MC_LOGGER("default")代替。同时，default等级的logger不需要特别指定，即: qInfo() << "text"; 最终会默认输出到default中
 
 ---
 
