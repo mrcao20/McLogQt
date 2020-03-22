@@ -5,7 +5,7 @@
 需重构以整理配置文件
 
 # logger
-日志记录器，本库默认带有一个root的日志记录器，故新指定的logger无需指定root，当然指定了也没事。logger的作用是创建一个新的日志记录器，每一个logger都可以有独自的配置信息，也可以使用公有的配置。logger的使用方法为：当记录日志时，第一个输出字符串使用:[logger]的方式指定对应的logger。即，当我需要记录一个info类型的日志信息"hello world"，需要指定到自定义的一个logger "test"，所使用的格式为：qInfo() << ":test" << "hello world";":test"也可以不指定，当不指定时hello world将会输出到root的logger中。注意，:test中的test必须在配置文件中指定，即该logger必须创建，如果没有创建，那么:test将会作为一个字符串输出到root中。
+日志记录器，本库默认带有一个default的日志记录器，故新指定的logger无需指定default，当然指定了也没事。logger的作用是创建一个新的日志记录器，每一个logger都可以有独自的配置信息，也可以使用公有的配置。logger的使用方法为：当记录日志时，第一个输出字符串使用:[logger]的方式指定对应的logger。即，当我需要记录一个info类型的日志信息"hello world"，需要指定到自定义的一个logger "test"，所使用的格式为：qInfo() << ":test" << "hello world";":test"也可以不指定，当不指定时hello world将会输出到default的logger中。注意，:test中的test必须在配置文件中指定，即该logger必须创建，如果没有创建，那么:test将会作为一个字符串输出到default中。
 
 ---
 
@@ -34,6 +34,6 @@
 - 如果和之前一样，指定的文件名为全路径，如：file=./log/log.log，那么生成的日志文件名将为log_\[年-月-日_时-分-秒\].log
 - 如果没有指定后缀，那么将自动添加.log后缀，其他和上面一样
 - 如果只指定了文件夹，如：file=./log/，那么最终文件名将为\[loggerName\]_\[年-月-日_时-分-秒\].log
-- 如何指定的文件名以.开头，则最终文件名前缀为loggerName，而且后缀为绝对后缀，即如果指定的文件名为root.text.log，则最终后缀为.text.log<br/>
+- 如何指定的文件名以.开头，则最终文件名前缀为loggerName，而且后缀为绝对后缀，即如果指定的文件名为default.text.log，则最终后缀为.text.log<br/>
 注意：如果指定文件夹，则必须以/结尾，否则会将其认定为文件名前缀
 
