@@ -1,0 +1,17 @@
+#pragma once
+
+#include "McPatternLayout.h"
+
+class MCLOGQT_EXPORT McSimpleLayout : public McPatternLayout {
+    Q_OBJECT
+    MC_DECL_INIT(McSimpleLayout)
+    MC_DEFINE_TYPELIST(MC_DECL_TYPELIST(McPatternLayout))
+public:
+    Q_INVOKABLE McSimpleLayout(){}
+    
+    Q_INVOKABLE
+    MC_BEAN_FINISHED
+    void finished() noexcept;
+};
+
+MC_DECL_METATYPE(McSimpleLayout)
