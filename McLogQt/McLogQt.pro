@@ -12,13 +12,15 @@ CONFIG(debug, debug|release) {
 } else {
     win32: TARGET = McLogQt
     else:unix: TARGET = McLogQt
+
+    DEFINES += QT_MESSAGELOGCONTEXT
 }
 
 TEMPLATE = lib
 
 DEFINES += MCLOGQT_LIBRARY
 
-# 去掉IOC容器的依赖部分(暂时没用)
+# 去掉IOC容器的依赖部分
 #DEFINES += MC_NO_IOC
 
 # The following define makes your compiler emit warnings if you use
@@ -39,11 +41,15 @@ unix {
 
 include(McLogQt.pri)
 
-win32: DESTDIR += $$PWD/../bin
-else:unix: DESTDIR += $$PWD/../bin
+DESTDIR = $$PWD/../bin
+MOC_DIR = $$PWD/../moc/McLogQt
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../McIocBoot/bin/ -lMcIocContainer
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../McIocBoot/bin/ -lMcIocContainerd
-
-INCLUDEPATH += $$PWD/../../McIocBoot/McIocContainer/include
-DEPENDPATH += $$PWD/../../McIocBoot/McIocContainer/include
+contains(DEFINES, MC_NO_IOC) {
+    message(defined MC_NO_IOC)
+}else{
+    win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../McIocBoot/bin/ -lMcIocContainer
+    else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../McIocBoot/bin/ -lMcIocContainerd
+    
+    INCLUDEPATH += $$PWD/../../McIocBoot/McIocContainer/include
+    DEPENDPATH += $$PWD/../../McIocBoot/McIocContainer/include
+}

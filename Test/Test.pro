@@ -28,7 +28,11 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-DESTDIR += $$PWD/../bin
+CONFIG(release, debug|release) {
+    DEFINES += QT_MESSAGELOGCONTEXT
+}
+
+DESTDIR = $$PWD/../bin
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../bin/ -lMcLogQt
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../bin/ -lMcLogQtd

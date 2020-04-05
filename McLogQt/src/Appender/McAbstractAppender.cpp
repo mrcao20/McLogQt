@@ -74,6 +74,12 @@ void McAbstractAppender::append(QtMsgType type, const QMessageLogContext &contex
         MC_PRINT_ERR("the appender not set layout. category: %s\n", context.category);
         return;
     }
+    //! 如果没有定义QT_MESSAGELOGCONTEXT
+    if (context.file == nullptr
+        && context.line == 0
+        && context.function == nullptr) {
+        MC_PRINT_ERR("in release, need to manual define QT_MESSAGELOGCONTEXT\n");
+    }
     auto message = l->format(type, context, str);
     
     if(d->immediateFlush) {

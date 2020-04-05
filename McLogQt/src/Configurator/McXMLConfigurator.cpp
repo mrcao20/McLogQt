@@ -4,7 +4,9 @@
 #include <QDir>
 #include <QThread>
 
+#ifndef MC_NO_IOC
 #include <ApplicationContext/impl/McLocalPathApplicationContext.h>
+#endif
 
 #include "include/McLogManager.h"
 #include "include/Repository/IMcLoggerRepository.h"
@@ -18,6 +20,10 @@ void McXMLConfigurator::configure(const QString &path, const QString &beanName) 
 }
 
 void McXMLConfigurator::doConfigure(const QString &path, const QString &beanName) noexcept {
+#ifdef MC_NO_IOC
+    Q_UNUSED(path)
+    Q_UNUSED(beanName)
+#else
     auto xmlPath = QDir::toNativeSeparators(path);
     QString sep = ".";
     sep += QDir::separator();
@@ -35,4 +41,5 @@ void McXMLConfigurator::doConfigure(const QString &path, const QString &beanName
     McLogManager::instance()->setLoggerRepository(rep);
     
     thread->start();
+#endif
 }

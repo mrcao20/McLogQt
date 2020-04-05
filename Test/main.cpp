@@ -8,9 +8,11 @@
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
 #include <QtConcurrent>
+#include <QSettings>
 
 #include "McLogManager.h"
 #include "Configurator/McXMLConfigurator.h"
+#include "Configurator/McINIConfigurator.h"
 
 #define MC_PRINT_ERR(...) \
     fprintf(stderr, __VA_ARGS__); \
@@ -22,7 +24,9 @@ int main(int argc, char *argv[])
     
     QGuiApplication app(argc, argv);
     
-    McXMLConfigurator::configure(R"(E:\QtCreator\McLogQt\Test\logqt.xml)");
+    //! 必须开启IOC支持
+//    McXMLConfigurator::configure(R"(E:\QtCreator\McLogQt\Test\logqt.xml)");
+    McINIConfigurator::configure(R"(E:\QtCreator\McLogQt\Test\logqt.ini)");
     McLogManager::installQtMessageHandler();
     
     qDebug() << "debug";
@@ -37,7 +41,7 @@ int main(int argc, char *argv[])
         for(int i = 0; i < 100; i++) {
             qDebug() << i;
             if(i == 10) {
-                qFatal("aa");
+//                qFatal("aa");
             }
         }
     });
