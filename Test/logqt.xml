@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans>
 	<bean name="ttccLayout" class="McTTCCLayout"></bean>
+	<!-- 常用配置 [%{time yyyy-MM-dd hh:mm:ss,zzz}][%{category}][%{type}]: %{message}  [File:%{file}] [Line:%{line}] [Function:%{function}] -->
 	<bean name="normalLayout" class="McNormalLayout"></bean>
 	<bean name="patternLayout" class="McPatternLayout">
+		<!-- 参考qSetMessagePattern -->
         <property name="pattern">
 			<value>[%{time yyyy-MM-dd hh:mm:ss,zzz}][%{category}][%{type}]: %{message}  [File:%{file}] [Line:%{line}] [Function:%{function}]</value>
 		</property>
@@ -13,6 +15,7 @@
 		<property name="layout" ref="ttccLayout"></property>
     </bean>
 	<bean name="dailyRollingFile" class="McDailyRollingFileAppender">
+		<!-- 后面加debug-表示debug等级及以上 -->
         <property name="threshold" value="debug-"></property>
 		<property name="backupDirPath" value="./log/dailyRollingFile/backup/"></property>
 		<property name="backupDirPattern" value="%{time yyyy-MM-dd}"></property>
@@ -23,11 +26,13 @@
 	<bean name="rollingFile" class="McSizeRollingFileAppender">
         <property name="threshold" value="debug-"></property>
 		<property name="immediateFlush" value="true"></property>
+		<!-- 单位可以是B，KB，MB，GB -->
 		<property name="maxFileSize" value="1KB"></property>
 		<property name="backupDirPath" value="./log/rollingFile/backup/"></property>
 		<property name="backupDirPattern" value="%{time yyyy-MM-dd}"></property>
 		<property name="dirPath" value="./log/rollingFile/"></property>
 		<property name="fileNamePattern" value="log_%{time yyyy-MM-dd_hh-mm-ss}.log"></property>
+		<!-- 未设置layout，默认使用McNormalLayout -->
     </bean>
 	<bean name="file" class="McFileAppender">
         <property name="threshold" value="fatal-"></property>
@@ -47,6 +52,7 @@
     </bean>
 	
 	<bean name="defaultLogger" class="McLogger">
+		<!-- 指定一个全局的threshold，优先级地狱Appender中的threshold -->
 		<property name="threshold" value="debug-"></property>
 		<property name="appenders">
 			<list>
