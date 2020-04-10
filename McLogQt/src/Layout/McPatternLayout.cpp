@@ -5,6 +5,8 @@
 #include <QDateTime>
 #include <QThread>
 
+namespace McPrivate {
+
 static bool isDefaultCategory(const char *category) {
     return !category || strcmp(category, "default") == 0;
 }
@@ -12,20 +14,22 @@ static bool isDefaultCategory(const char *category) {
 #ifndef QT_BOOTSTRAPPED
 #if defined(Q_OS_LINUX) && (defined(__GLIBC__) || QT_HAS_INCLUDE(<sys/syscall.h>))
 #  include <sys/syscall.h>
-#  include <unistd.h>
+#if  QT_HAS_INCLUDE(<unistd.h>)
+#   include <unistd.h>
+#endif
 
 # if defined(Q_OS_ANDROID) && !defined(SYS_gettid)
 #  define SYS_gettid __NR_gettid
 # endif
 
-static long qt_gettid() {
+static long mc_gettid() {
     // no error handling
     // this syscall has existed since Linux 2.4.11 and cannot fail
     return syscall(SYS_gettid);
 }
 #elif defined(Q_OS_DARWIN)
 #  include <pthread.h>
-static int qt_gettid() {
+static int mc_gettid() {
     // no error handling: this call cannot fail
     __uint64_t tid;
     pthread_threadid_np(NULL, &tid);
@@ -33,11 +37,11 @@ static int qt_gettid() {
 }
 #elif defined(Q_OS_FREEBSD_KERNEL) && defined(__FreeBSD_version) && __FreeBSD_version >= 900031
 #  include <pthread_np.h>
-static int qt_gettid() {
+static int mc_gettid() {
     return pthread_getthreadid_np();
 }
 #else
-static QT_PREPEND_NAMESPACE(qint64) qt_gettid() {
+static QT_PREPEND_NAMESPACE(qint64) mc_gettid() {
     QT_USE_NAMESPACE
     return qintptr(QThread::currentThreadId());
 }
@@ -53,7 +57,7 @@ static QT_PREPEND_NAMESPACE(qint64) qt_gettid() {
 /*!
     \internal
 */
-QByteArray qCleanupFuncinfo(QByteArray info) {
+QByteArray mcCleanupFuncinfo(QByteArray info) {
     // Strip the function info down to the base function name
     // note that this throws away the template definitions,
     // the parameter types (overloads) and any const/volatile qualifiers.
@@ -432,38 +436,9 @@ void McMessagePattern::setPattern(const QString &pattern) {
     memcpy(literals, literalsVar.constData(), static_cast<qulonglong>(literalsVar.size()) * sizeof(const char*));
 }
 
-MC_DECL_PRIVATE_DATA(McPatternLayout)
-QString pattern;
-McMessagePatternPtr messagePattern;
-MC_DECL_PRIVATE_DATA_END
-
-MC_INIT(McPatternLayout)
-MC_REGISTER_BEAN_FACTORY(MC_TYPELIST(McPatternLayout))
-MC_INIT_END
-
-McPatternLayout::McPatternLayout() {
-    MC_NEW_PRIVATE_DATA(McPatternLayout);
-    
-    d->messagePattern = McMessagePatternPtr::create();
-}
-
-McPatternLayout::~McPatternLayout() {
-}
-
-QString McPatternLayout::getPattern() const noexcept {
-    return d->pattern;
-}
-
-void McPatternLayout::setPattern(const QString &val) noexcept {
-    d->pattern = val;
-    
-    d->messagePattern->setPattern(val);
-}
-
-QString McPatternLayout::format(QtMsgType type, const QMessageLogContext &context, const QString &str) noexcept {
+QString format(McMessagePatternPtr pattern, QtMsgType type, const QMessageLogContext &context, const QString &str) noexcept {
     QString message;
 
-    auto pattern = d->messagePattern;
     if (!pattern) {
         // after destruction of static QMessagePattern instance
         message.append(str);
@@ -516,7 +491,7 @@ QString McPatternLayout::format(QtMsgType type, const QMessageLogContext &contex
             message.append(QString::number(context.line));
         } else if (token == functionTokenC) {
             if (context.function)
-                message.append(QString::fromLatin1(qCleanupFuncinfo(context.function)));
+                message.append(QString::fromLatin1(mcCleanupFuncinfo(context.function)));
             else
                 message.append(QLatin1String("unknown"));
 #ifndef QT_BOOTSTRAPPED
@@ -526,7 +501,7 @@ QString McPatternLayout::format(QtMsgType type, const QMessageLogContext &contex
             message.append(QCoreApplication::applicationName());
         } else if (token == threadidTokenC) {
             // print the TID as decimal
-            message.append(QString::number(qt_gettid()));
+            message.append(QString::number(mc_gettid()));
         } else if (token == qthreadptrTokenC) {
             message.append(QLatin1String("0x"));
             message.append(QString::number(qlonglong(QThread::currentThread()->currentThread()), 16));
@@ -574,4 +549,38 @@ QString McPatternLayout::format(QtMsgType type, const QMessageLogContext &contex
         }
     }
     return message;
+}
+
+}
+
+MC_DECL_PRIVATE_DATA(McPatternLayout)
+QString pattern;
+McPrivate::McMessagePatternPtr messagePattern;
+MC_DECL_PRIVATE_DATA_END
+
+MC_INIT(McPatternLayout)
+MC_REGISTER_BEAN_FACTORY(MC_TYPELIST(McPatternLayout))
+MC_INIT_END
+
+McPatternLayout::McPatternLayout() {
+    MC_NEW_PRIVATE_DATA(McPatternLayout);
+    
+    d->messagePattern = McPrivate::McMessagePatternPtr::create();
+}
+
+McPatternLayout::~McPatternLayout() {
+}
+
+QString McPatternLayout::getPattern() const noexcept {
+    return d->pattern;
+}
+
+void McPatternLayout::setPattern(const QString &val) noexcept {
+    d->pattern = val;
+    
+    d->messagePattern->setPattern(val);
+}
+
+QString McPatternLayout::format(QtMsgType type, const QMessageLogContext &context, const QString &str) noexcept {
+    return McPrivate::format(d->messagePattern, type, context, str);
 }
