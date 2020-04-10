@@ -20,7 +20,11 @@ bool McDailyRollingFileAppender::isNewNextFile() noexcept {
         return false;
     }
     auto filePath = file->fileName();
-    auto dateTime = QFileInfo(filePath).birthTime();
+    QFileInfo fileInfo(filePath);
+    auto dateTime = fileInfo.birthTime();
+    if(!dateTime.isValid()) {
+        dateTime = fileInfo.metadataChangeTime();
+    }
     if(!dateTime.isValid()) {
         qCritical("failed get birth time of the file: %s\n", qPrintable(filePath));
         return true;
