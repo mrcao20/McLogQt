@@ -61,11 +61,14 @@ void McRollingFileAppender::tryNextFile() noexcept {
     
     auto file = device().staticCast<QFile>();
     
-    auto mode = file->openMode();
     auto oldFilePath = file->fileName();
+    auto newFilePath = this->newFilePath();
+    if(newFilePath == oldFilePath) {
+        return;
+    }
+    auto mode = file->openMode();
+    
     file->close();
-    file->setFileName(newFilePath());
-    file->open(mode);
     
     auto backupPath = newBackupPath(oldFilePath);
     QDir dir(backupPath);
@@ -74,6 +77,9 @@ void McRollingFileAppender::tryNextFile() noexcept {
         return;
     }
     QFile::rename(oldFilePath, dir.absoluteFilePath(QFileInfo(oldFilePath).fileName()));
+    
+    file->setFileName(newFilePath);
+    file->open(mode);
 }
 
 QString McRollingFileAppender::newBackupPath(const QString &oldFilePath) const noexcept {
@@ -86,7 +92,15 @@ QString McRollingFileAppender::newBackupPath(const QString &oldFilePath) const n
     }
     
     auto list = match.capturedTexts();
+    QFileInfo fileInfo(oldFilePath);
+    auto dateTime = fileInfo.birthTime();
+    if(!dateTime.isValid()) {
+        dateTime = fileInfo.metadataChangeTime();
+    }
+    if(!dateTime.isValid()) {
+        qCritical("failed get birth time of the file: %s\n", qPrintable(oldFilePath));
+    }
     return dir.absoluteFilePath(list.at(1) 
-                                + QFileInfo(oldFilePath).birthTime().toString(list.at(2)) 
+                                + dateTime.toString(list.at(2)) 
                                 + list.at(3));
 }
