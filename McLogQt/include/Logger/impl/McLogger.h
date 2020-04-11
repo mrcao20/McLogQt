@@ -26,7 +26,7 @@ public:
     
     Q_INVOKABLE
     MC_BEAN_FINISHED
-    void finished() noexcept;
+    virtual void finished() noexcept;
     
     void log(QtMsgType type, const QMessageLogContext &context, const QString &str) noexcept override;
 

@@ -13,6 +13,8 @@ McConsoleAppender::~McConsoleAppender() {
 }
 
 void McConsoleAppender::finished() noexcept {
+    McFileDeviceAppender::finished();
+    
     QSharedPointer<QFile> file = QSharedPointer<QFile>::create();
     
     if(!file->open(stdout, QIODevice::WriteOnly)) {

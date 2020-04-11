@@ -57,11 +57,11 @@ public:
     
     Q_INVOKABLE
     MC_BEAN_FINISHED
-    void finished() noexcept;
+    virtual void finished() noexcept;
     
     Q_INVOKABLE
     MC_THREAD_FINISHED
-    void threadFinished() noexcept;
+    virtual void threadFinished() noexcept;
     
 protected:
     virtual void flush() noexcept = 0;

@@ -138,16 +138,20 @@ void McAbstractAppender::append_helper(const QByteArray &msg) noexcept {
 }
 
 QList<QtMsgType> McAbstractAppender::initThreshold(const QString &val) const noexcept {
+    auto typeStr = val.simplified();
     QList<QtMsgType> types;
     
-    if(!val.endsWith('-') && !val.startsWith('-')) {
-        auto type = strToEnum(val);
-        if(type != -1) {
-            types.append(static_cast<QtMsgType>(type));
+    if(!typeStr.endsWith('-') && !typeStr.startsWith('-')) {
+        auto list = typeStr.split(',');
+        for(auto str : list) {
+            auto type = strToEnum(str.simplified());
+            if(type != -1) {
+                types.append(static_cast<QtMsgType>(type));
+            }
         }
         return types;
-    }else if(val.startsWith('-')) {
-        auto level = val;
+    }else if(typeStr.startsWith('-')) {
+        auto level = typeStr.simplified();
         level.remove('-');
         auto type = strToEnum(level);
         
@@ -171,7 +175,7 @@ QList<QtMsgType> McAbstractAppender::initThreshold(const QString &val) const noe
         
         return types;
     }else{
-        auto level = val;
+        auto level = typeStr.simplified();
         level.remove('-');
         auto type = strToEnum(level);
         
@@ -198,15 +202,16 @@ QList<QtMsgType> McAbstractAppender::initThreshold(const QString &val) const noe
 }
 
 int McAbstractAppender::strToEnum(const QString &val) const noexcept {
-    if (val == LEVEL_DEBUG)
+    auto type = val.simplified();
+    if (type == LEVEL_DEBUG)
         return QtMsgType::QtDebugMsg;
-    else if (val == LEVEL_WARN)
+    else if (type == LEVEL_WARN)
         return QtMsgType::QtWarningMsg;
-    else if (val == LEVEL_CRITICAL)
+    else if (type == LEVEL_CRITICAL)
         return QtMsgType::QtCriticalMsg;
-    else if (val == LEVEL_FATAL)
+    else if (type == LEVEL_FATAL)
         return QtMsgType::QtFatalMsg;
-    else if(val == LEVEL_INFO)
+    else if(type == LEVEL_INFO)
         return QtMsgType::QtInfoMsg;
     return -1;
 }
