@@ -10,9 +10,7 @@ public:
     Q_INVOKABLE McConsoleAppender();
     ~McConsoleAppender() override;
     
-    Q_INVOKABLE
-    MC_BEAN_FINISHED
-    void finished() noexcept;
+    void finished() noexcept override;
 };
 
 MC_DECL_METATYPE(McConsoleAppender)

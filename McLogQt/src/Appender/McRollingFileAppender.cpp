@@ -44,6 +44,8 @@ void McRollingFileAppender::setBackupDirPattern(const QString &val) noexcept {
 }
 
 void McRollingFileAppender::finished() noexcept {
+    McFileAppender::finished();
+    
     if(backupDirPath().isEmpty())
         setBackupDirPath("./backup/");
     if(backupDirPattern().isEmpty())

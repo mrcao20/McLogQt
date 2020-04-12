@@ -70,17 +70,22 @@ QList<IMcConfigurableAppenderPtr> McSettingConfigurator::configAppenders(QSettin
         if(appenderName == "file") {
             McSizeRollingFileAppenderPtr appender = McSizeRollingFileAppenderPtr::create();
             
-            appender->setThreshold(settings.value("threshold", "").toString());
+            QString threshold;
+            auto value = settings.value("threshold", "");
+            if(value.type() == QVariant::String) {
+                threshold = value.toString();
+            }else{
+                threshold = value.toStringList().join(',');
+            }
+            appender->setThreshold(threshold);
             appender->setImmediateFlush(settings.value("immediateFlush", false).toBool());
-            appender->setMaxFileSize(settings.value("maxFileSize", "").toString());
+            appender->setMaxFileSize(settings.value("maxFileSize", "10MB").toString());
             appender->setBackupDirPath(settings.value("backupDirPath", "").toString());
             appender->setBackupDirPattern(settings.value("backupDirPattern", "").toString());
             appender->setDirPath(settings.value("dirPath", "").toString());
             appender->setFileNamePattern(settings.value("fileNamePattern").toString());
             
             appender->finished();
-            appender->McFileAppender::finished();
-            appender->McAbstractAppender::finished();
             appender->moveToThread(thread());
             appender->threadFinished();
             
@@ -88,11 +93,17 @@ QList<IMcConfigurableAppenderPtr> McSettingConfigurator::configAppenders(QSettin
         }else if(appenderName == "console") {
             McConsoleAppenderPtr appender = McConsoleAppenderPtr::create();
             
-            appender->setThreshold(settings.value("threshold", "").toString());
+            QString threshold;
+            auto value = settings.value("threshold", "");
+            if(value.type() == QVariant::String) {
+                threshold = value.toString();
+            }else{
+                threshold = value.toStringList().join(',');
+            }
+            appender->setThreshold(threshold);
             appender->setImmediateFlush(settings.value("immediateFlush", false).toBool());
             
             appender->finished();
-            appender->McAbstractAppender::finished();
             appender->moveToThread(thread());
             appender->threadFinished();
             

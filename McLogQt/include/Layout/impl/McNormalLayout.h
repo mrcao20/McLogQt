@@ -9,9 +9,7 @@ class MCLOGQT_EXPORT McNormalLayout : public McPatternLayout {
 public:
     Q_INVOKABLE McNormalLayout(){}
     
-    Q_INVOKABLE
-    MC_BEAN_FINISHED
-    void finished() noexcept;
+    void finished() noexcept override;
 };
 
 MC_DECL_METATYPE(McNormalLayout)

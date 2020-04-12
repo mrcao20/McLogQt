@@ -584,3 +584,6 @@ void McPatternLayout::setPattern(const QString &val) noexcept {
 QString McPatternLayout::format(QtMsgType type, const QMessageLogContext &context, const QString &str) noexcept {
     return McPrivate::format(d->messagePattern, type, context, str);
 }
+
+void McPatternLayout::finished() noexcept {
+}

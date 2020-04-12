@@ -57,6 +57,8 @@ void McFileAppender::setAppend(bool val) noexcept {
 }
 
 void McFileAppender::finished() noexcept {
+    McFileDeviceAppender::finished();
+    
     QSharedPointer<QFile> file = QSharedPointer<QFile>::create();
     setDevice(file);
     

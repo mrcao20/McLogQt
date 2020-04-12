@@ -18,6 +18,9 @@ public:
     
     QString format(QtMsgType type, const QMessageLogContext &context, const QString &str) noexcept override;
     
+    Q_INVOKABLE
+    MC_BEAN_FINISHED
+    virtual void finished() noexcept;
 private:
     MC_DECL_PRIVATE(McPatternLayout)
 };

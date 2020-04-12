@@ -24,9 +24,7 @@ public:
     bool isAppend() const noexcept;
     void setAppend(bool val) noexcept;
     
-    Q_INVOKABLE
-    MC_BEAN_FINISHED
-    void finished() noexcept;
+    void finished() noexcept override;
     
 protected:
     QString newFilePath() const noexcept;
