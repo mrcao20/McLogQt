@@ -1,7 +1,5 @@
 #include "McLog/Repository/impl/McLoggerRepository.h"
 
-#include <QThread>
-
 #include "McLog/Logger/IMcLogger.h"
 
 MC_DECL_PRIVATE_DATA(McLoggerRepository)
@@ -18,9 +16,6 @@ McLoggerRepository::McLoggerRepository() {
 }
 
 McLoggerRepository::~McLoggerRepository() {
-    thread()->quit();
-    thread()->wait();
-    thread()->deleteLater();
 }
 
 QMap<QString, IMcLoggerPtr> McLoggerRepository::loggers() const noexcept {

@@ -1,16 +1,18 @@
 #pragma once
 
 #include "../IMcLoggerRepository.h"
+#include "../../Utils/McDeleteThreadWhenQuit.h"
 
 MC_FORWARD_DECL_PRIVATE_DATA(McLoggerRepository);
 
 class McLoggerRepository 
         : public QObject
+        , public McDeleteThreadWhenQuit
         , public IMcLoggerRepository {
     
     Q_OBJECT
     MC_DECL_INIT(McLoggerRepository)
-    MC_DEFINE_TYPELIST(QObject, MC_DECL_TYPELIST(IMcLoggerRepository))
+    MC_DEFINE_TYPELIST(QObject, MC_DECL_TYPELIST(IMcLoggerRepository), MC_DECL_TYPELIST(McDeleteThreadWhenQuit))
     typedef QMap<QString, IMcLoggerPtr> LoggerMap;
     Q_PROPERTY(LoggerMap loggers READ loggers WRITE setLogger)
 public:

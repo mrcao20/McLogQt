@@ -55,13 +55,15 @@ public:
     QIODevicePtr device() const noexcept;
     void setDevice(QIODeviceConstPtrRef device) noexcept override;
     
+    virtual
     Q_INVOKABLE
     MC_BEAN_FINISHED
-    virtual void finished() noexcept;
+    void finished() noexcept;
     
+    virtual
     Q_INVOKABLE
     MC_THREAD_FINISHED
-    virtual void threadFinished() noexcept;
+    void threadFinished() noexcept;
     
 protected:
     virtual void flush() noexcept = 0;

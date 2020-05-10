@@ -25,8 +25,8 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
     
     //! 必须开启IOC支持
-//    McXMLConfigurator::configure(R"(E:\QtCreator\McLogQt\Test\logqt.xml)");
-    McINIConfigurator::configure(R"(E:\QtCreator\McLogQt\Test\logqt.ini)");
+    McXMLConfigurator::configure(R"(E:\QtCreator\McLogQt\Test\logqt.xml)");
+//    McINIConfigurator::configure(R"(E:\QtCreator\McLogQt\Test\logqt.ini)");
     McLogManager::installQtMessageHandler();
     
     qDebug() << "debug";
@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
         for(int i = 0; i < 100; i++) {
             qDebug() << i;
             if(i == 10) {
-//                qFatal("aa");
+                qFatal("aa");
             }
         }
     });
