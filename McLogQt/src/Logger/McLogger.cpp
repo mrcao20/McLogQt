@@ -1,6 +1,6 @@
-#include "include/Logger/impl/McLogger.h"
+#include "McLog/Logger/impl/McLogger.h"
 
-#include "include/Appender/IMcConfigurableAppender.h"
+#include "McLog/Appender/IMcConfigurableAppender.h"
 
 MC_DECL_PRIVATE_DATA(McLogger)
 QString threshold;

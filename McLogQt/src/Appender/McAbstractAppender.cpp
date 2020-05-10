@@ -1,10 +1,10 @@
-#include "include/Appender/impl/McAbstractAppender.h"
+#include "McLog/Appender/impl/McAbstractAppender.h"
 
 #include <QCoreApplication>
 #include <QIODevice>
 #include <QThread>
 
-#include "include/Layout/impl/McNormalLayout.h"
+#include "McLog/Layout/impl/McNormalLayout.h"
 
 #define LEVEL_DEBUG "debug"
 #define LEVEL_WARN "warn"

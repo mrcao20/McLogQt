@@ -1,4 +1,4 @@
-#include "include/Configurator/McINIConfigurator.h"
+#include "McLog/Configurator/McINIConfigurator.h"
 
 #include <QCoreApplication>
 #include <QSettings>
