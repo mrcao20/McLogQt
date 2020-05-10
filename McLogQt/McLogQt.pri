@@ -1,3 +1,5 @@
+INCLUDEPATH += $$PWD/include/
+
 SOURCES += \
     $$PWD/src/Appender/McAbstractAppender.cpp \
     $$PWD/src/Appender/McConsoleAppender.cpp \
@@ -18,29 +20,29 @@ SOURCES += \
     $$PWD/src/Repository/McLoggerRepository.cpp
 
 HEADERS += \
-    $$PWD/include/Appender/IMcAppender.h \
-    $$PWD/include/Appender/IMcConfigurableAppender.h \
-    $$PWD/include/Appender/IMcWritableAppender.h \
-    $$PWD/include/Appender/impl/McAbstractAppender.h \
-    $$PWD/include/Appender/impl/McConsoleAppender.h \
-    $$PWD/include/Appender/impl/McDailyRollingFileAppender.h \
-    $$PWD/include/Appender/impl/McFileAppender.h \
-    $$PWD/include/Appender/impl/McFileDeviceAppender.h \
-    $$PWD/include/Appender/impl/McRollingFileAppender.h \
-    $$PWD/include/Appender/impl/McSizeRollingFileAppender.h \
-    $$PWD/include/Configurator/McINIConfigurator.h \
-    $$PWD/include/Configurator/McSettingConfigurator.h \
-    $$PWD/include/Configurator/McXMLConfigurator.h \
-    $$PWD/include/Layout/IMcLayout.h \
-    $$PWD/include/Layout/impl/McNormalLayout.h \
-    $$PWD/include/Layout/impl/McPatternLayout.h \
-    $$PWD/include/Layout/impl/McSimpleLayout.h \
-    $$PWD/include/Layout/impl/McTTCCLayout.h \
-    $$PWD/include/Logger/IMcLogger.h \
-    $$PWD/include/Logger/impl/McLogger.h \
-    $$PWD/include/McLogGlobal.h \
-    $$PWD/include/McLogMacroGlobal.h \
-    $$PWD/include/McLogManager.h \
-    $$PWD/include/McLogVersion.h \
-    $$PWD/include/Repository/IMcLoggerRepository.h \
-    $$PWD/include/Repository/impl/McLoggerRepository.h
+    $$PWD/include/McLog/Appender/IMcAppender.h \
+    $$PWD/include/McLog/Appender/IMcConfigurableAppender.h \
+    $$PWD/include/McLog/Appender/IMcWritableAppender.h \
+    $$PWD/include/McLog/Appender/impl/McAbstractAppender.h \
+    $$PWD/include/McLog/Appender/impl/McConsoleAppender.h \
+    $$PWD/include/McLog/Appender/impl/McDailyRollingFileAppender.h \
+    $$PWD/include/McLog/Appender/impl/McFileAppender.h \
+    $$PWD/include/McLog/Appender/impl/McFileDeviceAppender.h \
+    $$PWD/include/McLog/Appender/impl/McRollingFileAppender.h \
+    $$PWD/include/McLog/Appender/impl/McSizeRollingFileAppender.h \
+    $$PWD/include/McLog/Configurator/McINIConfigurator.h \
+    $$PWD/include/McLog/Configurator/McSettingConfigurator.h \
+    $$PWD/include/McLog/Configurator/McXMLConfigurator.h \
+    $$PWD/include/McLog/Layout/IMcLayout.h \
+    $$PWD/include/McLog/Layout/impl/McNormalLayout.h \
+    $$PWD/include/McLog/Layout/impl/McPatternLayout.h \
+    $$PWD/include/McLog/Layout/impl/McSimpleLayout.h \
+    $$PWD/include/McLog/Layout/impl/McTTCCLayout.h \
+    $$PWD/include/McLog/Logger/IMcLogger.h \
+    $$PWD/include/McLog/Logger/impl/McLogger.h \
+    $$PWD/include/McLog/McLogGlobal.h \
+    $$PWD/include/McLog/McLogMacroGlobal.h \
+    $$PWD/include/McLog/McLogManager.h \
+    $$PWD/include/McLog/McLogVersion.h \
+    $$PWD/include/McLog/Repository/IMcLoggerRepository.h \
+    $$PWD/include/McLog/Repository/impl/McLoggerRepository.h

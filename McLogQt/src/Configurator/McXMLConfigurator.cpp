@@ -1,15 +1,15 @@
-#include "include/Configurator/McXMLConfigurator.h"
+#include "McLog/Configurator/McXMLConfigurator.h"
 
 #include <QCoreApplication>
 #include <QDir>
 #include <QThread>
 
 #ifndef MC_NO_IOC
-#include <ApplicationContext/impl/McLocalPathApplicationContext.h>
+#include <McIoc/ApplicationContext/impl/McLocalPathApplicationContext.h>
 #endif
 
-#include "include/McLogManager.h"
-#include "include/Repository/IMcLoggerRepository.h"
+#include "McLog/McLogManager.h"
+#include "McLog/Repository/IMcLoggerRepository.h"
 
 McXMLConfigurator::McXMLConfigurator() {
 }

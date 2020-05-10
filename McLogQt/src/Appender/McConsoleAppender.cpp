@@ -1,4 +1,4 @@
-#include "include/Appender/impl/McConsoleAppender.h"
+#include "McLog/Appender/impl/McConsoleAppender.h"
 
 #include <QFile>
 

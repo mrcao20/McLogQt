@@ -1,14 +1,14 @@
-#include "include/Configurator/McSettingConfigurator.h"
+#include "McLog/Configurator/McSettingConfigurator.h"
 
 #include <QSettings>
 #include <QThread>
 #include <QDebug>
 
-#include "include/McLogManager.h"
-#include "include/Repository/impl/McLoggerRepository.h"
-#include "include/Logger/impl/McLogger.h"
-#include "include/Appender/impl/McConsoleAppender.h"
-#include "include/Appender/impl/McSizeRollingFileAppender.h"
+#include "McLog/McLogManager.h"
+#include "McLog/Repository/impl/McLoggerRepository.h"
+#include "McLog/Logger/impl/McLogger.h"
+#include "McLog/Appender/impl/McConsoleAppender.h"
+#include "McLog/Appender/impl/McSizeRollingFileAppender.h"
 
 McSettingConfigurator::McSettingConfigurator() {
 }

@@ -10,9 +10,9 @@
 #include <QtConcurrent>
 #include <QSettings>
 
-#include "McLogManager.h"
-#include "Configurator/McXMLConfigurator.h"
-#include "Configurator/McINIConfigurator.h"
+#include "McLog/McLogManager.h"
+#include "McLog/Configurator/McXMLConfigurator.h"
+#include "McLog/Configurator/McINIConfigurator.h"
 
 #define MC_PRINT_ERR(...) \
     fprintf(stderr, __VA_ARGS__); \

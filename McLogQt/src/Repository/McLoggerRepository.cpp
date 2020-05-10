@@ -1,8 +1,8 @@
-#include "include/Repository/impl/McLoggerRepository.h"
+#include "McLog/Repository/impl/McLoggerRepository.h"
 
 #include <QThread>
 
-#include "include/Logger/IMcLogger.h"
+#include "McLog/Logger/IMcLogger.h"
 
 MC_DECL_PRIVATE_DATA(McLoggerRepository)
 QMap<QString, IMcLoggerPtr> loggers;

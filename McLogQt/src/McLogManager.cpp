@@ -1,7 +1,7 @@
-#include "include/McLogManager.h"
+#include "McLog/McLogManager.h"
 
-#include "include/Repository/IMcLoggerRepository.h"
-#include "include/Logger/IMcLogger.h"
+#include "McLog/Repository/IMcLoggerRepository.h"
+#include "McLog/Logger/IMcLogger.h"
 
 MC_DECL_PRIVATE_DATA(McLogManager)
 IMcLoggerRepositoryPtr loggerRepository;
