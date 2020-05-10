@@ -5,7 +5,7 @@
 // version format MC_LOG_MAJOR.MC_LOG_MINOR.MC_LOG_PATCH.MC_LOG_INTERNAL
 #define MC_LOG_MAJOR 1 // version when you make big feature changes.
 #define MC_LOG_MINOR 0 // version when you make small feature changes.
-#define MC_LOG_PATCH 1 // version when you make backwards-compatible bug fixes.
+#define MC_LOG_PATCH 2 // version when you make backwards-compatible bug fixes.
 #define MC_LOG_INTERNAL 0 // MC_LOG_INTERNAL version for perpurse like feature test, bug fix test,development, et
 
 #ifdef QT_DEBUG

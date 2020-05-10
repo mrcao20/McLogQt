@@ -40,6 +40,7 @@ void McSettingConfigurator::doConfigure(QSettings &settings) noexcept {
     }
     
     rep->moveToThread(thread());
+    rep->deleteWhenQuit();
     McLogManager::instance()->setLoggerRepository(rep);
     
     settings.endGroup();

@@ -23,6 +23,7 @@ void McLogManager::setLoggerRepository(IMcLoggerRepositoryConstPtrRef val) noexc
 }
 
 McLogManager *McLogManager::instance() noexcept {
+    //! 好像有bug，存在如果主程序中没有静态局部对象或者没有优先调用一次此函数时析构不掉
     static McLogManager instance;
     return &instance;
 }

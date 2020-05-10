@@ -24,9 +24,10 @@ public:
     QList<IMcConfigurableAppenderPtr> appenders() const noexcept;
     void setAppenders(const QList<IMcConfigurableAppenderPtr> &val) noexcept;
     
+    virtual
     Q_INVOKABLE
     MC_BEAN_FINISHED
-    virtual void finished() noexcept;
+    void finished() noexcept;
     
     void log(QtMsgType type, const QMessageLogContext &context, const QString &str) noexcept override;
 
