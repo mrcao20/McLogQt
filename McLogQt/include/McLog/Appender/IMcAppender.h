@@ -2,7 +2,8 @@
 
 #include "../McLogGlobal.h"
 
-class IMcAppender {
+class IMcAppender 
+{
     MC_DEFINE_TYPELIST()
 public:
     virtual ~IMcAppender() = default;

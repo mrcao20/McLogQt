@@ -14,18 +14,22 @@ MC_DECL_PRIVATE_DATA_END
 MC_INIT(McRollingFileAppender)
 MC_INIT_END
 
-McRollingFileAppender::McRollingFileAppender() {
+McRollingFileAppender::McRollingFileAppender() 
+{
     MC_NEW_PRIVATE_DATA(McRollingFileAppender);
 }
 
-McRollingFileAppender::~McRollingFileAppender() {
+McRollingFileAppender::~McRollingFileAppender() 
+{
 }
 
-QString McRollingFileAppender::backupDirPath() const noexcept {
+QString McRollingFileAppender::backupDirPath() const noexcept 
+{
     return d->backupDirPath;
 }
 
-void McRollingFileAppender::setBackupDirPath(const QString &val) noexcept {
+void McRollingFileAppender::setBackupDirPath(const QString &val) noexcept 
+{
     d->backupDirPath = QDir::toNativeSeparators(val);
     QString sep = ".";
     sep += QDir::separator();
@@ -35,15 +39,18 @@ void McRollingFileAppender::setBackupDirPath(const QString &val) noexcept {
     }
 }
 
-QString McRollingFileAppender::backupDirPattern() const noexcept {
+QString McRollingFileAppender::backupDirPattern() const noexcept 
+{
     return d->backupDirPattern;
 }
 
-void McRollingFileAppender::setBackupDirPattern(const QString &val) noexcept {
+void McRollingFileAppender::setBackupDirPattern(const QString &val) noexcept 
+{
     d->backupDirPattern = val;
 }
 
-void McRollingFileAppender::finished() noexcept {
+void McRollingFileAppender::finished() noexcept 
+{
     McFileAppender::finished();
     
     if(backupDirPath().isEmpty())
@@ -52,7 +59,8 @@ void McRollingFileAppender::finished() noexcept {
         setBackupDirPattern("%{time yyyy-MM-dd}");
 }
 
-void McRollingFileAppender::tryNextFile() noexcept {
+void McRollingFileAppender::tryNextFile() noexcept 
+{
     if(device().isNull()) {
         return;
     }
@@ -84,7 +92,8 @@ void McRollingFileAppender::tryNextFile() noexcept {
     file->open(mode);
 }
 
-QString McRollingFileAppender::newBackupPath(const QString &oldFilePath) const noexcept {
+QString McRollingFileAppender::newBackupPath(const QString &oldFilePath) const noexcept 
+{
     QRegularExpression re(R"((.*)%\{time (.*?)\}(.*))");
     auto match = re.match(d->backupDirPattern);
     

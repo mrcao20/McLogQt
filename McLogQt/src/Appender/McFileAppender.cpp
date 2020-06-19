@@ -19,18 +19,22 @@ MC_INIT(McFileAppender)
 MC_REGISTER_BEAN_FACTORY(MC_TYPELIST(McFileAppender))
 MC_INIT_END
 
-McFileAppender::McFileAppender() {
+McFileAppender::McFileAppender() 
+{
     MC_NEW_PRIVATE_DATA(McFileAppender);
 }
 
-McFileAppender::~McFileAppender() {
+McFileAppender::~McFileAppender() 
+{
 }
 
-QString McFileAppender::dirPath() const noexcept {
+QString McFileAppender::dirPath() const noexcept 
+{
     return d->dirPath;
 }
 
-void McFileAppender::setDirPath(const QString &val) noexcept {
+void McFileAppender::setDirPath(const QString &val) noexcept 
+{
     d->dirPath = QDir::toNativeSeparators(val);
     QString sep = ".";
     sep += QDir::separator();
@@ -40,23 +44,28 @@ void McFileAppender::setDirPath(const QString &val) noexcept {
     }
 }
 
-QString McFileAppender::fileNamePattern() const noexcept {
+QString McFileAppender::fileNamePattern() const noexcept 
+{
     return d->fileNamePattern;
 }
 
-void McFileAppender::setFileNamePattern(const QString &val) noexcept {
+void McFileAppender::setFileNamePattern(const QString &val) noexcept 
+{
     d->fileNamePattern = val;
 }
 
-bool McFileAppender::isAppend() const noexcept {
+bool McFileAppender::isAppend() const noexcept 
+{
     return d->isAppend;
 }
 
-void McFileAppender::setAppend(bool val) noexcept {
+void McFileAppender::setAppend(bool val) noexcept 
+{
     d->isAppend = val;
 }
 
-void McFileAppender::finished() noexcept {
+void McFileAppender::finished() noexcept 
+{
     McFileDeviceAppender::finished();
     
     QSharedPointer<QFile> file = QSharedPointer<QFile>::create();
@@ -110,7 +119,8 @@ void McFileAppender::finished() noexcept {
     tryNextFile();
 }
 
-QString McFileAppender::newFilePath() const noexcept {
+QString McFileAppender::newFilePath() const noexcept 
+{
     QRegularExpression re(R"((.*)%\{time (.*?)\}(.*))");
     auto match = re.match(d->fileNamePattern);
     

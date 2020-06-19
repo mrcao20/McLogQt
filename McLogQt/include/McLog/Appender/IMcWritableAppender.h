@@ -6,7 +6,8 @@ QT_BEGIN_NAMESPACE
 MC_FORWARD_DECL_CLASS(QIODevice);
 QT_END_NAMESPACE
 
-class IMcWritableAppender {
+class IMcWritableAppender 
+{
     MC_DEFINE_TYPELIST()
 public:
     virtual ~IMcWritableAppender() = default;

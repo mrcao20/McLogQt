@@ -7,7 +7,9 @@
 McINIConfigurator::McINIConfigurator() {
 }
 
-void McINIConfigurator::configure(const QString &path) noexcept {
+
+void McINIConfigurator::configure(const QString &path) noexcept 
+{
     auto iniPath = QDir::toNativeSeparators(path);
     QString sep = ".";
     sep += QDir::separator();

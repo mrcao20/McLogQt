@@ -15,7 +15,8 @@
 const QEvent::Type McAppenderEvent::eventType = 
         static_cast<QEvent::Type>(QEvent::registerEventType(QEvent::User + 1));
 
-McAppenderEvent::~McAppenderEvent() {
+McAppenderEvent::~McAppenderEvent() 
+{
 }
 
 MC_DECL_PRIVATE_DATA(McAbstractAppender)
@@ -30,42 +31,51 @@ MC_DECL_PRIVATE_DATA_END
 MC_INIT(McAbstractAppender)
 MC_INIT_END
 
-McAbstractAppender::McAbstractAppender() {
+McAbstractAppender::McAbstractAppender() 
+{
     MC_NEW_PRIVATE_DATA(McAbstractAppender);
 }
 
-McAbstractAppender::~McAbstractAppender() {
+McAbstractAppender::~McAbstractAppender() 
+{
     if(!d->device.isNull() && d->device->isOpen())
         d->device->close();
 }
 
-IMcLayoutPtr McAbstractAppender::layout() const noexcept {
+IMcLayoutPtr McAbstractAppender::layout() const noexcept 
+{
     return d->layout;
 }
 
-void McAbstractAppender::setLayout(IMcLayoutConstPtrRef val) noexcept {
+void McAbstractAppender::setLayout(IMcLayoutConstPtrRef val) noexcept 
+{
     d->layout = val;
 }
 
-QString McAbstractAppender::threshold() const noexcept {
+QString McAbstractAppender::threshold() const noexcept 
+{
     return d->threshold;
 }
 
-void McAbstractAppender::setThreshold(const QString &val) noexcept {
+void McAbstractAppender::setThreshold(const QString &val) noexcept 
+{
     d->threshold = val.toLower();
     
     d->types = initThreshold(d->threshold);
 }
 
-bool McAbstractAppender::immediateFlush() const noexcept {
+bool McAbstractAppender::immediateFlush() const noexcept 
+{
     return d->immediateFlush;
 }
 
-void McAbstractAppender::setImmediateFlush(bool val) noexcept {
+void McAbstractAppender::setImmediateFlush(bool val) noexcept 
+{
     d->immediateFlush = val;
 }
 
-void McAbstractAppender::append(QtMsgType type, const QMessageLogContext &context, const QString &str) noexcept {
+void McAbstractAppender::append(QtMsgType type, const QMessageLogContext &context, const QString &str) noexcept 
+{
     if(!d->types.contains(type)) {
         return;
     }
@@ -96,15 +106,18 @@ void McAbstractAppender::append(QtMsgType type, const QMessageLogContext &contex
     }
 }
 
-QIODevicePtr McAbstractAppender::device() const noexcept {
+QIODevicePtr McAbstractAppender::device() const noexcept 
+{
     return d->device;
 }
 
-void McAbstractAppender::setDevice(QIODeviceConstPtrRef device) noexcept {
+void McAbstractAppender::setDevice(QIODeviceConstPtrRef device) noexcept 
+{
     d->device = device;
 }
 
-void McAbstractAppender::finished() noexcept {
+void McAbstractAppender::finished() noexcept 
+{
     if(layout().isNull()) {
         auto l = McNormalLayoutPtr::create();
         l->finished();
@@ -112,7 +125,8 @@ void McAbstractAppender::finished() noexcept {
     }
 }
 
-void McAbstractAppender::threadFinished() noexcept {
+void McAbstractAppender::threadFinished() noexcept 
+{
     auto l = layout();  //!< 一定存在
     auto pl = l.staticCast<McPatternLayout>();  //!< 一定成功
     if(pl->thread() != thread()) {
@@ -120,14 +134,16 @@ void McAbstractAppender::threadFinished() noexcept {
     }
 }
 
-void McAbstractAppender::customEvent(QEvent *event) {
+void McAbstractAppender::customEvent(QEvent *event) 
+{
     if(event->type() == McAppenderEvent::eventType) {
         auto e = static_cast<McAppenderEvent *>(event);
         append_helper(e->msg().toLocal8Bit());
     }
 }
 
-void McAbstractAppender::append_helper(const QByteArray &msg) noexcept {
+void McAbstractAppender::append_helper(const QByteArray &msg) noexcept 
+{
     auto out = device();
     if(out.isNull() || !out->isOpen()) {
         return;
@@ -137,7 +153,8 @@ void McAbstractAppender::append_helper(const QByteArray &msg) noexcept {
     flush();
 }
 
-QList<QtMsgType> McAbstractAppender::initThreshold(const QString &val) const noexcept {
+QList<QtMsgType> McAbstractAppender::initThreshold(const QString &val) const noexcept 
+{
     auto typeStr = val.simplified();
     QList<QtMsgType> types;
     
@@ -201,7 +218,8 @@ QList<QtMsgType> McAbstractAppender::initThreshold(const QString &val) const noe
     }
 }
 
-int McAbstractAppender::strToEnum(const QString &val) const noexcept {
+int McAbstractAppender::strToEnum(const QString &val) const noexcept 
+{
     auto type = val.simplified();
     if (type == LEVEL_DEBUG)
         return QtMsgType::QtDebugMsg;

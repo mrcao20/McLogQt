@@ -4,7 +4,8 @@
 #include "IMcWritableAppender.h"
 
 class IMcConfigurableAppender 
-        : public IMcAppender {
+        : public IMcAppender 
+{
     
     MC_DEFINE_TYPELIST(MC_DECL_TYPELIST(IMcAppender))
 public:

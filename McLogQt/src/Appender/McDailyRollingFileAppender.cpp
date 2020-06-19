@@ -8,10 +8,12 @@ MC_INIT(McDailyRollingFileAppender)
 MC_REGISTER_BEAN_FACTORY(MC_TYPELIST(McDailyRollingFileAppender))
 MC_INIT_END
 
-McDailyRollingFileAppender::McDailyRollingFileAppender() {
+McDailyRollingFileAppender::McDailyRollingFileAppender() 
+{
 }
 
-bool McDailyRollingFileAppender::isNewNextFile() noexcept {
+bool McDailyRollingFileAppender::isNewNextFile() noexcept 
+{
     if(device().isNull()) {
         return false;
     }

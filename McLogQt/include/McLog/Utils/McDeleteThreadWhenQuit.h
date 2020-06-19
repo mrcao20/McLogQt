@@ -10,7 +10,8 @@ MC_FORWARD_DECL_PRIVATE_DATA(McDeleteThreadWhenQuit);
 
 class McDeleteThreadWhenQuit
 #ifndef MC_NO_IOC
-    : public IMcDeleteThreadWhenQuit {
+    : public IMcDeleteThreadWhenQuit 
+{
     MC_DEFINE_TYPELIST(MC_DECL_TYPELIST(IMcDeleteThreadWhenQuit))
 #else
 {

@@ -6,13 +6,16 @@ MC_INIT(McFileDeviceAppender)
 MC_REGISTER_BEAN_FACTORY(MC_TYPELIST(McFileDeviceAppender))
 MC_INIT_END
 
-McFileDeviceAppender::McFileDeviceAppender() {
+McFileDeviceAppender::McFileDeviceAppender() 
+{
 }
 
-McFileDeviceAppender::~McFileDeviceAppender() {
+McFileDeviceAppender::~McFileDeviceAppender() 
+{
 }
 
-void McFileDeviceAppender::flush() noexcept {
+void McFileDeviceAppender::flush() noexcept 
+{
     auto fileDevice = device().staticCast<QFileDevice>();
     
     if(fileDevice.isNull()) {
@@ -24,5 +27,6 @@ void McFileDeviceAppender::flush() noexcept {
     tryNextFile();
 }
 
-void McFileDeviceAppender::tryNextFile() noexcept {
+void McFileDeviceAppender::tryNextFile() noexcept 
+{
 }

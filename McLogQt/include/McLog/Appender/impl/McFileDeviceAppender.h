@@ -2,7 +2,8 @@
 
 #include "McAbstractAppender.h"
 
-class MCLOGQT_EXPORT McFileDeviceAppender : public McAbstractAppender {
+class MCLOGQT_EXPORT McFileDeviceAppender : public McAbstractAppender 
+{
     Q_OBJECT
     MC_DECL_INIT(McFileDeviceAppender)
     MC_DEFINE_TYPELIST(MC_DECL_TYPELIST(McAbstractAppender))

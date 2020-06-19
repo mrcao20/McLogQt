@@ -2,7 +2,8 @@
 
 #include "McRollingFileAppender.h"
 
-class MCLOGQT_EXPORT McDailyRollingFileAppender : public McRollingFileAppender {
+class MCLOGQT_EXPORT McDailyRollingFileAppender : public McRollingFileAppender 
+{
     Q_OBJECT
     MC_DECL_INIT(McDailyRollingFileAppender)
     MC_DEFINE_TYPELIST(MC_DECL_TYPELIST(McRollingFileAppender))

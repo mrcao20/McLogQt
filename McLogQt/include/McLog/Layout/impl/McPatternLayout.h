@@ -4,7 +4,8 @@
 
 MC_FORWARD_DECL_PRIVATE_DATA(McPatternLayout);
 
-class MCLOGQT_EXPORT McPatternLayout : public QObject, public IMcLayout {
+class MCLOGQT_EXPORT McPatternLayout : public QObject, public IMcLayout 
+{
     Q_OBJECT
     MC_DECL_INIT(McPatternLayout)
     MC_DEFINE_TYPELIST(QObject, MC_DECL_TYPELIST(IMcLayout))

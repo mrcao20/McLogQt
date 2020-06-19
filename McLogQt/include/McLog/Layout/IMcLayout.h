@@ -2,7 +2,8 @@
 
 #include "../McLogGlobal.h"
 
-class IMcLayout {
+class IMcLayout 
+{
     MC_DEFINE_TYPELIST()
 public:
     virtual ~IMcLayout() = default;

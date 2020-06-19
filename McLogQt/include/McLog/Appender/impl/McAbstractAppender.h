@@ -5,7 +5,8 @@
 
 #include <QEvent>
 
-class McAppenderEvent : public QEvent {
+class McAppenderEvent : public QEvent 
+{
 public:
     static const QEvent::Type eventType;
     
@@ -14,9 +15,8 @@ public:
         , m_msg(msg)
     {}
     ~McAppenderEvent() override;
-    QString msg() const noexcept {
-        return m_msg;
-    }
+    QString msg() const noexcept 
+    { return m_msg; }
     
 private:
     QString m_msg;
@@ -29,7 +29,8 @@ MC_FORWARD_DECL_PRIVATE_DATA(McAbstractAppender);
 class MCLOGQT_EXPORT McAbstractAppender 
         : public QObject
         , public IMcConfigurableAppender
-        , public IMcWritableAppender{
+        , public IMcWritableAppender
+{
     
     Q_OBJECT
     MC_DECL_INIT(McAbstractAppender)

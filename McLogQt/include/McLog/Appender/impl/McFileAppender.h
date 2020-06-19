@@ -4,7 +4,8 @@
 
 MC_FORWARD_DECL_PRIVATE_DATA(McFileAppender);
 
-class MCLOGQT_EXPORT McFileAppender : public McFileDeviceAppender {
+class MCLOGQT_EXPORT McFileAppender : public McFileDeviceAppender 
+{
     Q_OBJECT
     MC_DECL_INIT(McFileAppender)
     MC_DEFINE_TYPELIST(MC_DECL_TYPELIST(McFileDeviceAppender))
