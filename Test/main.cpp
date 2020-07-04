@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
     
     //! 必须开启IOC支持
-    McXMLConfigurator::configure(R"(E:\QtCreator\McLogQt\Test\logqt.xml)");
+    McXMLConfigurator::configure(R"(E:\Code\QtCreator\McLogQt\Test\logqt.xml)");
 //    McINIConfigurator::configure(R"(E:\QtCreator\McLogQt\Test\logqt.ini)");
     McLogManager::installQtMessageHandler();
     

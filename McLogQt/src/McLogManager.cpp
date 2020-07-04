@@ -14,6 +14,7 @@ McLogManager::McLogManager()
 
 McLogManager::~McLogManager() 
 {
+    McLogManager::uninstallQtMessageHandler();
 }
 
 IMcLoggerRepositoryPtr McLogManager::loggerRepository() const noexcept 
