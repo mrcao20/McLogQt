@@ -1,5 +1,6 @@
 TEMPLATE = subdirs
 
-SUBDIRS += \
-    McLogQt \
-    Test
+SUBDIRS += McLogQt
+
+SUBDIRS += Test
+Test.depends += McLogQt

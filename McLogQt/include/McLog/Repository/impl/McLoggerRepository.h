@@ -8,7 +8,8 @@ MC_FORWARD_DECL_PRIVATE_DATA(McLoggerRepository);
 class McLoggerRepository 
         : public QObject
         , public McDeleteThreadWhenQuit
-        , public IMcLoggerRepository {
+        , public IMcLoggerRepository 
+{
     
     Q_OBJECT
     MC_DECL_INIT(McLoggerRepository)

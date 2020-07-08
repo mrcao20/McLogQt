@@ -6,7 +6,8 @@ MC_FORWARD_DECL_CLASS(IMcLoggerRepository)
 
 MC_FORWARD_DECL_PRIVATE_DATA(McLogManager);
 
-class MCLOGQT_EXPORT McLogManager : public QObject {
+class MCLOGQT_EXPORT McLogManager : public QObject 
+{
     Q_OBJECT
     Q_DISABLE_COPY(McLogManager)
     McLogManager();

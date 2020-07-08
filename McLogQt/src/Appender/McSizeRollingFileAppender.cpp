@@ -11,18 +11,22 @@ MC_INIT(McSizeRollingFileAppender)
 MC_REGISTER_BEAN_FACTORY(MC_TYPELIST(McSizeRollingFileAppender))
 MC_INIT_END
 
-McSizeRollingFileAppender::McSizeRollingFileAppender() {
+McSizeRollingFileAppender::McSizeRollingFileAppender() 
+{
     MC_NEW_PRIVATE_DATA(McSizeRollingFileAppender);
 }
 
-McSizeRollingFileAppender::~McSizeRollingFileAppender() {
+McSizeRollingFileAppender::~McSizeRollingFileAppender() 
+{
 }
 
-QString McSizeRollingFileAppender::maxFileSize() const noexcept {
+QString McSizeRollingFileAppender::maxFileSize() const noexcept 
+{
     return d->maxFileSize;
 }
 
-void McSizeRollingFileAppender::setMaxFileSize(const QString &val) noexcept {
+void McSizeRollingFileAppender::setMaxFileSize(const QString &val) noexcept 
+{
     d->maxFileSize = val.toUpper();
     
     auto temp = d->maxFileSize;
@@ -57,15 +61,18 @@ void McSizeRollingFileAppender::setMaxFileSize(const QString &val) noexcept {
     }
 }
 
-qint64 McSizeRollingFileAppender::maxFileSizeBytes() const noexcept {
+qint64 McSizeRollingFileAppender::maxFileSizeBytes() const noexcept 
+{
     return d->maxFileSizeBytes;
 }
 
-void McSizeRollingFileAppender::setMaxFileSizeBytes(qint64 val) noexcept {
+void McSizeRollingFileAppender::setMaxFileSizeBytes(qint64 val) noexcept 
+{
     d->maxFileSizeBytes = val;
 }
 
-bool McSizeRollingFileAppender::isNewNextFile() noexcept {
+bool McSizeRollingFileAppender::isNewNextFile() noexcept 
+{
     if(d->maxFileSizeBytes == -1) {
         return false;
     }

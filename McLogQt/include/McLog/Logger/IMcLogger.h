@@ -2,7 +2,8 @@
 
 #include "../McLogGlobal.h"
 
-class IMcLogger {
+class IMcLogger 
+{
     MC_DEFINE_TYPELIST()
 public:
     virtual ~IMcLogger() = default;

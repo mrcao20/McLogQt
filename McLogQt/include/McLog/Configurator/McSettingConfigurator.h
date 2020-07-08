@@ -9,7 +9,8 @@ QT_END_NAMESPACE
 MC_FORWARD_DECL_CLASS(IMcLogger);
 MC_FORWARD_DECL_CLASS(IMcConfigurableAppender);
 
-class MCLOGQT_EXPORT McSettingConfigurator : public QObject {
+class MCLOGQT_EXPORT McSettingConfigurator : public QObject 
+{
     Q_OBJECT
 public:
     McSettingConfigurator();

@@ -2,7 +2,8 @@
 
 #include "McPatternLayout.h"
 
-class MCLOGQT_EXPORT McNormalLayout : public McPatternLayout {
+class MCLOGQT_EXPORT McNormalLayout : public McPatternLayout 
+{
     Q_OBJECT
     MC_DECL_INIT(McNormalLayout)
     MC_DEFINE_TYPELIST(MC_DECL_TYPELIST(McPatternLayout))

@@ -4,7 +4,8 @@ MC_INIT(McTTCCLayout)
 MC_REGISTER_BEAN_FACTORY(MC_TYPELIST(McTTCCLayout))
 MC_INIT_END
 
-void McTTCCLayout::finished() noexcept {
+void McTTCCLayout::finished() noexcept 
+{
     McPatternLayout::finished();
     
     QString pattern = "[%{appname}][%{time yyyy-MM-dd hh:mm:ss,zzz}][%{category}][%{type}]: "

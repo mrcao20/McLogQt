@@ -11,15 +11,18 @@
 #include "McLog/McLogManager.h"
 #include "McLog/Repository/IMcLoggerRepository.h"
 
-McXMLConfigurator::McXMLConfigurator() {
+McXMLConfigurator::McXMLConfigurator() 
+{
 }
 
-void McXMLConfigurator::configure(const QString &path, const QString &beanName) noexcept {
+void McXMLConfigurator::configure(const QString &path, const QString &beanName) noexcept 
+{
     McXMLConfigurator configurator;
     configurator.doConfigure(path, beanName);
 }
 
-void McXMLConfigurator::doConfigure(const QString &path, const QString &beanName) noexcept {
+void McXMLConfigurator::doConfigure(const QString &path, const QString &beanName) noexcept 
+{
 #ifdef MC_NO_IOC
     Q_UNUSED(path)
     Q_UNUSED(beanName)

@@ -12,30 +12,37 @@ MC_REGISTER_BEAN_FACTORY(MC_TYPELIST(McLogger))
 MC_REGISTER_LIST_CONVERTER(QList<IMcConfigurableAppenderPtr>)
 MC_INIT_END
 
-McLogger::McLogger() {
+McLogger::McLogger() 
+{
     MC_NEW_PRIVATE_DATA(McLogger);
 }
 
-McLogger::~McLogger() {
+McLogger::~McLogger() 
+{
 }
 
-QString McLogger::threshold() const noexcept {
+QString McLogger::threshold() const noexcept 
+{
     return d->threshold;
 }
 
-void McLogger::setThreshold(const QString &val) noexcept {
+void McLogger::setThreshold(const QString &val) noexcept 
+{
     d->threshold = val;
 }
 
-QList<IMcConfigurableAppenderPtr> McLogger::appenders() const noexcept {
+QList<IMcConfigurableAppenderPtr> McLogger::appenders() const noexcept 
+{
     return d->appenders;
 }
 
-void McLogger::setAppenders(const QList<IMcConfigurableAppenderPtr> &val) noexcept {
+void McLogger::setAppenders(const QList<IMcConfigurableAppenderPtr> &val) noexcept 
+{
     d->appenders = val;
 }
 
-void McLogger::finished() noexcept {
+void McLogger::finished() noexcept 
+{
     if(threshold().isEmpty())
         setThreshold("debug-");
     for(auto appender : d->appenders) {
@@ -45,7 +52,8 @@ void McLogger::finished() noexcept {
     }
 }
 
-void McLogger::log(QtMsgType type, const QMessageLogContext &context, const QString &str) noexcept {
+void McLogger::log(QtMsgType type, const QMessageLogContext &context, const QString &str) noexcept 
+{
     for(auto appender : d->appenders) {
         appender->append(type, context, str);
     }

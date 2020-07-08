@@ -2,7 +2,8 @@
 
 #include "McSettingConfigurator.h"
 
-class MCLOGQT_EXPORT McINIConfigurator : public McSettingConfigurator {
+class MCLOGQT_EXPORT McINIConfigurator : public McSettingConfigurator 
+{
     Q_OBJECT
     using McSettingConfigurator::configure;
 public:

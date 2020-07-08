@@ -4,7 +4,8 @@
 
 MC_FORWARD_DECL_PRIVATE_DATA(McSizeRollingFileAppender);
 
-class MCLOGQT_EXPORT McSizeRollingFileAppender : public McRollingFileAppender {
+class MCLOGQT_EXPORT McSizeRollingFileAppender : public McRollingFileAppender 
+{
     Q_OBJECT
     MC_DECL_INIT(McSizeRollingFileAppender)
     MC_DEFINE_TYPELIST(MC_DECL_TYPELIST(McRollingFileAppender))

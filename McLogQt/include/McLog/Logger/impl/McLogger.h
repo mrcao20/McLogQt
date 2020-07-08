@@ -8,7 +8,8 @@ MC_FORWARD_DECL_CLASS(IMcConfigurableAppender)
 
 MC_FORWARD_DECL_PRIVATE_DATA(McLogger);
 
-class MCLOGQT_EXPORT McLogger : public QObject, public IMcLogger {
+class MCLOGQT_EXPORT McLogger : public QObject, public IMcLogger 
+{
     Q_OBJECT
     MC_DECL_INIT(McLogger)
     MC_DEFINE_TYPELIST(QObject, MC_DECL_TYPELIST(IMcLogger))

@@ -10,10 +10,12 @@
 #include "McLog/Appender/impl/McConsoleAppender.h"
 #include "McLog/Appender/impl/McSizeRollingFileAppender.h"
 
-McSettingConfigurator::McSettingConfigurator() {
+McSettingConfigurator::McSettingConfigurator() 
+{
 }
 
-void McSettingConfigurator::configure(QSettings &settings) noexcept {
+void McSettingConfigurator::configure(QSettings &settings) noexcept 
+{
     McSettingConfigurator configurator;
     QThread *thread = new QThread();
     configurator.moveToThread(thread);
@@ -21,7 +23,8 @@ void McSettingConfigurator::configure(QSettings &settings) noexcept {
     thread->start();
 }
 
-void McSettingConfigurator::doConfigure(QSettings &settings) noexcept {
+void McSettingConfigurator::doConfigure(QSettings &settings) noexcept 
+{
     settings.value("logger");   //!< 在beginGroup之前不预先获取一次之后就读不到数据
     settings.beginGroup("logger");
     
@@ -46,7 +49,8 @@ void McSettingConfigurator::doConfigure(QSettings &settings) noexcept {
     settings.endGroup();
 }
 
-IMcLoggerPtr McSettingConfigurator::configLogger(QSettings &settings) noexcept {
+IMcLoggerPtr McSettingConfigurator::configLogger(QSettings &settings) noexcept 
+{
     McLoggerPtr logger = McLoggerPtr::create();
     
     auto threshold = settings.value("threshold", "debug-").toString();
@@ -61,7 +65,8 @@ IMcLoggerPtr McSettingConfigurator::configLogger(QSettings &settings) noexcept {
     return std::move(logger);
 }
 
-QList<IMcConfigurableAppenderPtr> McSettingConfigurator::configAppenders(QSettings &settings) noexcept {
+QList<IMcConfigurableAppenderPtr> McSettingConfigurator::configAppenders(QSettings &settings) noexcept 
+{
     QList<IMcConfigurableAppenderPtr> appenders;
     
     auto list = settings.childGroups();

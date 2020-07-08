@@ -2,7 +2,8 @@
 
 #include "../McLogGlobal.h"
 
-class MCLOGQT_EXPORT McXMLConfigurator : public QObject {
+class MCLOGQT_EXPORT McXMLConfigurator : public QObject 
+{
     Q_OBJECT
 public:
     McXMLConfigurator();

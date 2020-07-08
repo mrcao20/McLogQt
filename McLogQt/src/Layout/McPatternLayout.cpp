@@ -7,7 +7,8 @@
 
 namespace McPrivate {
 
-static bool isDefaultCategory(const char *category) {
+static bool isDefaultCategory(const char *category) 
+{
     return !category || strcmp(category, "default") == 0;
 }
 
@@ -22,14 +23,16 @@ static bool isDefaultCategory(const char *category) {
 #  define SYS_gettid __NR_gettid
 # endif
 
-static long mc_gettid() {
+static long mc_gettid() 
+{
     // no error handling
     // this syscall has existed since Linux 2.4.11 and cannot fail
     return syscall(SYS_gettid);
 }
 #elif defined(Q_OS_DARWIN)
 #  include <pthread.h>
-static int mc_gettid() {
+static int mc_gettid() 
+{
     // no error handling: this call cannot fail
     __uint64_t tid;
     pthread_threadid_np(NULL, &tid);
@@ -37,11 +40,13 @@ static int mc_gettid() {
 }
 #elif defined(Q_OS_FREEBSD_KERNEL) && defined(__FreeBSD_version) && __FreeBSD_version >= 900031
 #  include <pthread_np.h>
-static int mc_gettid() {
+static int mc_gettid() 
+{
     return pthread_getthreadid_np();
 }
 #else
-static QT_PREPEND_NAMESPACE(qint64) mc_gettid() {
+static QT_PREPEND_NAMESPACE(qint64) mc_gettid() 
+{
     QT_USE_NAMESPACE
     return qintptr(QThread::currentThreadId());
 }
@@ -57,7 +62,8 @@ static QT_PREPEND_NAMESPACE(qint64) mc_gettid() {
 /*!
     \internal
 */
-QByteArray mcCleanupFuncinfo(QByteArray info) {
+QByteArray mcCleanupFuncinfo(QByteArray info) 
+{
     // Strip the function info down to the base function name
     // note that this throws away the template definitions,
     // the parameter types (overloads) and any const/volatile qualifiers.
@@ -234,7 +240,8 @@ static const char emptyTokenC[] = "";
 static const char defaultPattern[] = "%{if-category}%{category}: %{endif}%{message}";
 
 
-struct McMessagePattern {
+struct McMessagePattern 
+{
     McMessagePattern();
     ~McMessagePattern();
 
@@ -248,7 +255,8 @@ struct McMessagePattern {
     QElapsedTimer timer;
 #endif
 #ifdef QLOGGING_HAVE_BACKTRACE
-    struct BacktraceParams {
+    struct BacktraceParams 
+    {
         QString backtraceSeparator;
         int backtraceDepth;
     };
@@ -270,7 +278,8 @@ McMessagePattern::McMessagePattern()
     setPattern(QLatin1String(defaultPattern));
 }
 
-McMessagePattern::~McMessagePattern() {
+McMessagePattern::~McMessagePattern() 
+{
     for (int i = 0; literals[i]; ++i)
         delete [] literals[i];
     delete [] literals;
@@ -279,7 +288,8 @@ McMessagePattern::~McMessagePattern() {
     tokens = nullptr;
 }
 
-void McMessagePattern::setPattern(const QString &pattern) {
+void McMessagePattern::setPattern(const QString &pattern) 
+{
     if (literals) {
         for (int i = 0; literals[i]; ++i)
             delete [] literals[i];
@@ -436,7 +446,8 @@ void McMessagePattern::setPattern(const QString &pattern) {
     memcpy(literals, literalsVar.constData(), static_cast<qulonglong>(literalsVar.size()) * sizeof(const char*));
 }
 
-QString format(McMessagePatternPtr pattern, QtMsgType type, const QMessageLogContext &context, const QString &str) noexcept {
+QString format(McMessagePatternPtr pattern, QtMsgType type, const QMessageLogContext &context, const QString &str) noexcept 
+{
     QString message;
 
     if (!pattern) {
@@ -562,28 +573,34 @@ MC_INIT(McPatternLayout)
 MC_REGISTER_BEAN_FACTORY(MC_TYPELIST(McPatternLayout))
 MC_INIT_END
 
-McPatternLayout::McPatternLayout() {
+McPatternLayout::McPatternLayout() 
+{
     MC_NEW_PRIVATE_DATA(McPatternLayout);
     
     d->messagePattern = McPrivate::McMessagePatternPtr::create();
 }
 
-McPatternLayout::~McPatternLayout() {
+McPatternLayout::~McPatternLayout() 
+{
 }
 
-QString McPatternLayout::getPattern() const noexcept {
+QString McPatternLayout::getPattern() const noexcept 
+{
     return d->pattern;
 }
 
-void McPatternLayout::setPattern(const QString &val) noexcept {
+void McPatternLayout::setPattern(const QString &val) noexcept 
+{
     d->pattern = val;
     
     d->messagePattern->setPattern(val);
 }
 
-QString McPatternLayout::format(QtMsgType type, const QMessageLogContext &context, const QString &str) noexcept {
+QString McPatternLayout::format(QtMsgType type, const QMessageLogContext &context, const QString &str) noexcept 
+{
     return McPrivate::format(d->messagePattern, type, context, str);
 }
 
-void McPatternLayout::finished() noexcept {
+void McPatternLayout::finished() noexcept 
+{
 }

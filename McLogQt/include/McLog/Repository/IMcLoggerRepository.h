@@ -4,7 +4,8 @@
 
 MC_FORWARD_DECL_CLASS(IMcLogger)
 
-class IMcLoggerRepository {
+class IMcLoggerRepository 
+{
     MC_DEFINE_TYPELIST()
 public:
     virtual ~IMcLoggerRepository() = default;
