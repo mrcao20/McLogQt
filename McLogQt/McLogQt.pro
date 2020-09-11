@@ -53,3 +53,8 @@ contains(DEFINES, MC_NO_IOC) {
     INCLUDEPATH += $$PWD/../../McIocBoot/McIocContainer/include
     DEPENDPATH += $$PWD/../../McIocBoot/McIocContainer/include
 }
+
+msvc {
+    QMAKE_CFLAGS += /utf-8
+    QMAKE_CXXFLAGS += /utf-8
+}

@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
         for(int i = 0; i < 100; i++) {
             qDebug() << i;
             if(i == 10) {
-                qFatal("aa");
+//                qFatal("aa");
             }
         }
     });

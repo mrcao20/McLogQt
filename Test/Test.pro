@@ -45,3 +45,8 @@ else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../McIocBoot/bin/ -l
 
 INCLUDEPATH += $$PWD/../../McIocBoot/McIocContainer/include
 DEPENDPATH += $$PWD/../../McIocBoot/McIocContainer/include
+
+msvc {
+    QMAKE_CFLAGS += /utf-8
+    QMAKE_CXXFLAGS += /utf-8
+}
