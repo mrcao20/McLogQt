@@ -26,3 +26,6 @@ McLogManager::installQtMessageHandler();
 
 # 注意
 1. 该库默认开启了IOC支持，该支持依赖于另一个项目McIocBoot中的McIocContainer库，并且如果要使用XML声明的形式则必须开启此支持。可以在pro文件中加入DEFINES += MC_NO_IOC来关闭IOC。
+
+# 2021-8-13
+本库已废弃，迁移至McQuickBoot
